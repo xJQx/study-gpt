@@ -12,7 +12,7 @@ export const NavDrawer = ({ isOpen, links }: NavDrawerProps) => {
     <div
       className={`${
         isOpen ? 'block lg:hidden absolute top-16 right-8' : 'hidden'
-      } lg:relative lg:top-0 lg:right-0 lg:block`}
+      } lg:relative lg:top-0 lg:right-0`}
     >
       <div className="bg-brand-neutral px-6 py-4 rounded-md">
         <MenuItems links={links} isOpen={isOpen} />
