@@ -1,2 +1,2 @@
 // Components
-export { NavbarMobile, Navbar, Footer, Layout } from './components';
+export { Layout } from './components';

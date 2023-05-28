@@ -22,7 +22,7 @@ export const Layout = ({ children }: LayoutProps) => {
       <Navbar {...navbarProps} />
 
       {/* Body */}
-      <main className="h-full">{children}</main>
+      <main className="px-8">{children}</main>
 
       {/* Footer */}
       <Footer />
