@@ -1,0 +1,1 @@
+export { FlashCard } from './FlashCard';

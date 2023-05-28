@@ -14,6 +14,18 @@
         "varsIgnorePattern": "^_"
       }
     ],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": ["@common/*/*", "@features/*/*"]
+      }
+    ],
     "no-return-await": "error",
     "no-useless-return": "error",
     "prefer-const": "error"

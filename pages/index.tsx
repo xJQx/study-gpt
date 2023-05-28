@@ -1,3 +1,11 @@
+import { Button } from '@/components';
+import { FlashCard } from '@/features/flashcard';
+
 export default function Home() {
-  return <div>Home</div>;
+  return (
+    <div>
+      <FlashCard />
+      <Button />
+    </div>
+  );
 }
