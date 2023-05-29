@@ -1,1 +1,1 @@
-export { HomeHero } from './components';
+export { HomeHero, TryNowRibbon } from './components';
