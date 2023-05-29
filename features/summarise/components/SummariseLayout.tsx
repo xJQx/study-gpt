@@ -18,16 +18,16 @@ export const SummariseLayout = () => {
       body: JSON.stringify({
         userId: localStorage.getItem('userId'),
         text: notes,
-        title:"idk bro",
-        apiKey: "apiKey"
+        title: 'idk bro',
+        apiKey: localStorage.getItem('apiKey')
       }),
       headers: {
         'Content-Type': 'application/json'
       }
-    }).then(async(res)=>{
+    }).then(async res => {
       const resultantResponse = await res.json();
-      const {summary} = resultantResponse.data;
-      setSummarisedNotes(summary)
+      const { summary } = resultantResponse.data;
+      setSummarisedNotes(summary);
       toggleNotesInput(false);
     });
   };

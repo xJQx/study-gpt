@@ -7,7 +7,6 @@ import { UserModal } from '../UserModal';
 import {
   signInWithPopup,
   GoogleAuthProvider,
-  getAuth,
   onAuthStateChanged
 } from 'firebase/auth';
 import { auth } from '@/common/config/FirebaseService';
@@ -20,6 +19,7 @@ interface MenuItemsProps {
 export const MenuItems = ({ isOpen = false, links }: MenuItemsProps) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currUser, setCurrUser] = useState<any>(null);
+ 
 
   const {
     isOpen: isProfileModalOpen,
@@ -50,6 +50,7 @@ export const MenuItems = ({ isOpen = false, links }: MenuItemsProps) => {
         setIsLoggedIn(false);
         setCurrUser(null);
         localStorage.removeItem("userId");
+        localStorage.removeItem("apiKey");
       }
     });
   }, []);
