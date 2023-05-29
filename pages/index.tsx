@@ -1,11 +1,9 @@
-import { Button } from '@/components';
-import { FlashCard } from '@/features/flashcard';
+import { HomeHero } from '@/features/promo';
 
 export default function Home() {
   return (
     <div>
-      <FlashCard />
-      <Button />
+      <HomeHero />
     </div>
   );
 }

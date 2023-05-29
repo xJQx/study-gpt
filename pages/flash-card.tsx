@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { FlashCardContent } from '@/features/flashcard/components/FlashCardContent';
 
-export const FlashCard = () => {
+export default function FlashCard() {
     const [ansRevealed, toggleAnsReveal] = useState(false);
     const [questionNo, addQuestionNo] = useState(0);
 
@@ -21,39 +22,31 @@ export const FlashCard = () => {
     }
 
     return (
-    <div className='shadow p-10 bg-gray-100 mx-48 my-12 rounded-lg text-lg'>
-        { !ansRevealed
-            ? <>
-                <div>
-                    <h2 className='font-bold text-2xl mb-4'>{ list[questionNo].question }</h2>
-                    <p>FlashCard lorum ipsum</p>
-                </div>
-                <button
-                    className='flex justify-end ml-auto mr-0 mt-2 bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 rounded'
-                    onClick={() => toggleAnsReveal(true)}
-                >
-                    Answer
-                </button>
-            </>
-            : <>
-                <div>
-                    <h2 className='font-bold text-2xl mb-4'>{ list[questionNo].ans }</h2>
-                    <p>FlashCard lorum ipsum</p>
-                </div>
-                {
-                    questionNo < list.length - 1
-                    ? <button
+        <div className='shadow p-10 bg-gray-100 mx-48 my-12 rounded-lg text-lg'>
+            { !ansRevealed
+                ? <>
+                    <FlashCardContent title={ list[questionNo].question } paragraph='FlashCard lorum ipsum' />
+                    <button
                         className='flex justify-end ml-auto mr-0 mt-2 bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 rounded'
-                        onClick={nextQuestion}
+                        onClick={() => toggleAnsReveal(true)}
                     >
-                        Next
+                        Answer
                     </button>
-                    : <></>
-                }
-            </>
-        } 
-    </div>
+                </>
+                : <>
+                    <FlashCardContent title={ list[questionNo].ans } paragraph='FlashCard lorum ipsum' />
+                    {
+                        questionNo < list.length - 1
+                        ? <button
+                            className='flex justify-end ml-auto mr-0 mt-2 bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 rounded'
+                            onClick={nextQuestion}
+                        >
+                            Next
+                        </button>
+                        : <></>
+                    }
+                </>
+            } 
+        </div>
     );
-};
-
-
+}

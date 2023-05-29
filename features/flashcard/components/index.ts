@@ -1,1 +1,1 @@
-export { FlashCard } from './FlashCard';
+// export { FlashCard } from './FlashCard';
