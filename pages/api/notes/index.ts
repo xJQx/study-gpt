@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
-import getGPTPrompt from '@/features/nlp/gptapi';
+
 
 export default async function  handler (
   req: NextApiRequest,
@@ -11,12 +11,11 @@ export default async function  handler (
 //   try {
     if (method === 'POST') {
       const { text } = body;
-      const promptResult = await getGPTPrompt(text);
-    //   const promptResult = "LOL"
+    //   const promptResult = getGPTPrompt(text);
     //   return res.status(200).json({res:text})
 
       return res.status(200).json({
-        promptResult
+        promptResult:"a"
       });
     } else {
       return res.status(404).json({ message: 'Method not found' });
