@@ -1,6 +1,6 @@
 import React from 'react';
 import { MenuLink, MenuLinkProps } from './MenuLink';
-import Link from 'next/link';
+import { ButtonLink } from '@/components';
 
 interface MenuItemsProps {
   isOpen?: boolean;
@@ -22,12 +22,7 @@ export const MenuItems = ({ isOpen = false, links }: MenuItemsProps) => {
       </div>
 
       {/* CTA Button -> Contact */}
-      <Link
-        href="/contact"
-        className="bg-brand-pink hover:bg-brand-red text-white px-[16px] py-[10px] mt-8 lg:mt-0 w-max block"
-      >
-        <div className="block">Contact</div>
-      </Link>
+      <ButtonLink label="Contact" href="/contact" />
     </div>
   );
 };
