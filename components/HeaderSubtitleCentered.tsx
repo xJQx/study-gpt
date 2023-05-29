@@ -12,4 +12,4 @@ export const HeaderSubtitleCentered = ({ title, subTitle }: HeaderSubtitleCenter
             <p className='text-sm text-gray-500 font-bold'>{ subTitle }</p>
         </div>
     );
-}
+};
