@@ -8,15 +8,6 @@ interface LayoutProps {
 }
 
 export const Layout = ({ children }: LayoutProps) => {
-  const navbarProps: NavBarProps = {
-    links: [
-      { href: '/', label: 'Home' },
-      { href: '/summarise', label: 'Summarise' },
-      { href: '/explain', label: 'Explain' },
-      { href: '/flash-card', label: 'Flash Card' }
-    ]
-  };
-
   return (
     <div className="min-h-screen">
       {/* Navbar */}
@@ -32,4 +23,13 @@ export const Layout = ({ children }: LayoutProps) => {
       <TryNowRibbon href="/flash-card" />
     </div>
   );
+};
+
+const navbarProps: NavBarProps = {
+  links: [
+    { href: '/', label: 'Home' },
+    { href: '/summarise', label: 'Summarise' },
+    { href: '/explain', label: 'Explain' },
+    { href: '/flash-card', label: 'Flash Card' }
+  ]
 };
