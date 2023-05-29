@@ -24,12 +24,17 @@ export const FlashCardMainLayout = () => {
         toggleNotesView(false);
     }
 
+    function newTest() {
+        setNotes('');
+        toggleNotesView(true);
+    }
+
     return (
         <div className='shadow p-10 bg-gray-100 mx-48 my-12 rounded-lg text-lg'>
             {
                 isNotesView 
                 ? <Notes submitNotes={submitNotes} />
-                : <FlashCardLayout list={questions} />
+                : <FlashCardLayout list={questions} newTest={newTest} />
             }
         </div>
     );

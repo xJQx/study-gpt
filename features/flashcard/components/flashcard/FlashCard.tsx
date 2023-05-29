@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { FlashCardContent } from './FlashCardContent';
 
 interface FlashCardProps {
-    list: {question: string, answer: string}[]
+    list: {question: string, answer: string}[],
+    newTest: () => void;
 }
 
-export const FlashCardLayout = ({ list }: FlashCardProps) => {
+export const FlashCardLayout = ({ list, newTest }: FlashCardProps) => {
     const [ansRevealed, toggleAnsReveal] = useState(false);
     const [questionNo, setQuestionNo] = useState(0);
 
@@ -60,7 +61,12 @@ export const FlashCardLayout = ({ list }: FlashCardProps) => {
                     >
                         Next
                     </button>
-                    : <></>
+                    : <button
+                        className='flex justify-end ml-auto mr-0 bg-brand-red hover:bg-brand-pink text-white font-bold py-2 px-4 rounded'
+                        onClick={newTest}
+                    >
+                        Back to Home
+                    </button>
                 }
             </div>
         </>
