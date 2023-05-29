@@ -31,8 +31,7 @@ jobs:
         run: npm run lint
 
       - name: Build
-        run: npm run build
-        with:
+        env:
           # Main firebase config
           API_KEY: ${{ secrets.API_KEY }}
           AUTH_DOMAIN: ${{ secrets.AUTH_DOMAIN }}
@@ -55,3 +54,4 @@ jobs:
           NEXT_PUBLIC_MESSAGING_SENDER_ID: ${{ secrets.NEXT_PUBLIC_MESSAGING_SENDER_ID }}
           NEXT_PUBLIC_APP_ID: ${{ secrets.NEXT_PUBLIC_APP_ID }}
           NEXT_PUBLIC_DATABASE_URL: ${{ secrets.NEXT_PUBLIC_DATABASE_URL }}
+        run: npm run build
