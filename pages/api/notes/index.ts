@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import getGPTPrompt from '@/features/nlp/gptapi';
 import { db } from '../../../common/config/FirebaseService';
-import { ref, push } from 'firebase/database';
+import { ref, push, set } from 'firebase/database';
 
 export default async function handler(
   req: NextApiRequest,
@@ -11,7 +11,7 @@ export default async function handler(
   // check the type of request
   const { method, body } = req;
   if (method === 'POST') {
-    const { text, APIkey } = body;
+    const { text, APIkey, title } = body;
 
     // const gptText =  `Topic 1: Measurement
     // Physical quantities and SI units
@@ -81,6 +81,7 @@ export default async function handler(
     const putTopic = async () => {
       await push(ref(db, 'topic/'), {
         userId: 'testing',
+        title,
         summary,
         notes
       }).then(async res => {
@@ -91,8 +92,7 @@ export default async function handler(
     // add questions into firebase realtime database
     const putQuestions = async (topicId: string | null) => {
       if (topicId) {
-        await push(ref(db, 'questions/'), {
-          topicId,
+        await set(ref(db, 'questions/' + topicId), {
           quiz
         });
       }
@@ -102,9 +102,10 @@ export default async function handler(
       .then(() => {
         return res.status(200).json({
           data: {
+            title,
             message: 'Successfully created',
-            summary: promptResult.summary,
-            quiz: promptResult.quiz
+            summary,
+            quiz
           }
         });
       })
@@ -114,8 +115,6 @@ export default async function handler(
           message: 'Something went wrong'
         });
       });
-
-    return res.status(200).json({ message: 'Added', res: result });
   } else {
     return res.status(404).json({ message: 'Method not found' });
   }
