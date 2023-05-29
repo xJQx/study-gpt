@@ -3,7 +3,7 @@ import { FaArrowDown } from 'react-icons/fa';
 import Image from 'next/image';
 import { keyframes } from '@emotion/react';
 import Link from 'next/link';
-import { linearGradientClassName } from '@/styles/styles';
+import { textLinearGradientClassName } from '@/styles/styles';
 
 export const HomeHero = () => {
   return (
@@ -32,7 +32,7 @@ export const HomeHero = () => {
             role="heading"
             fontSize={['32px', '48px', '48px', '64px']}
             fontWeight="bold"
-            className={linearGradientClassName}
+            className={textLinearGradientClassName}
             _hover={{ letterSpacing: 6 }}
             transitionDuration="0.3s"
           >
@@ -44,7 +44,7 @@ export const HomeHero = () => {
           <Text
             as="span"
             fontSize={['18px', '18px', '24px', '24px']}
-            className={linearGradientClassName}
+            className={textLinearGradientClassName}
           >
             Learn and Revise with GPT&nbsp;
           </Text>
