@@ -1,1 +1,2 @@
-export { FlashCardLayout } from './FlashCardLayout';
+// Components
+export { FlashCardMainLayout } from './components';
