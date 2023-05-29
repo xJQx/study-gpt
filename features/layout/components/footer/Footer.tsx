@@ -4,7 +4,7 @@ import { FaGithub } from 'react-icons/fa';
 
 export const Footer = () => {
   return (
-    <div className="fixed bottom-2 w-full flex flex-col items-center justify-center text-xs mt-24 pb-4 px-4 text-center">
+    <div className="w-full flex flex-col items-center justify-center text-xs mt-24 pb-4 px-4 text-center">
       {/* Contributors */}
       <div>
         Made with <span className="text-red-500">❤</span> by{' '}
