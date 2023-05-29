@@ -1,0 +1,1 @@
+export { FlashCardLayout } from './FlashCard';
