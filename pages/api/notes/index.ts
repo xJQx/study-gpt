@@ -8,21 +8,19 @@ export default async function  handler (
 ) {
   // check the type of request
   const { method, body } = req;
-//   try {
     if (method === 'POST') {
-      const { text } = body;
-      const promptResult = await getGPTPrompt(text);
-    //   const promptResult = "LOL"
-    //   return res.status(200).json({res:text})
+      const { text,APIkey } = body;
+    //   const promptResult = await getGPTPrompt(text,APIkey);    
 
       return res.status(200).json({
-        promptResult
+        data:{
+            summary:"",
+            quiz:[
+                {question:"What is 1+1?",answer:"2"},
+            ]
+        }
       });
     } else {
       return res.status(404).json({ message: 'Method not found' });
     }
-//   } catch (e: any) {
-//     console.log(e);
-//     return res.status(500).json({ message: e.message });
-//   }
 }
