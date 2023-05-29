@@ -22,7 +22,7 @@ export const Layout = ({ children }: LayoutProps) => {
       <Navbar {...navbarProps} />
 
       {/* Body */}
-      <main className="px-8">{children}</main>
+      <main>{children}</main>
 
       {/* Footer */}
       <Footer />
