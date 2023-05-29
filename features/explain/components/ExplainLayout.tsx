@@ -11,6 +11,7 @@ export const ExplainLayout = () => {
 
   const explain = async () => {
     setSentInput(input);
+    setInput('');
     setExplanation('');
     // TODO: Send notes to api, receive response. If api did not return an error message, toggle to flash cards; otherwise
     // notify error to user
