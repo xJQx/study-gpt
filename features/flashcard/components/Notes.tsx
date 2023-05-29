@@ -9,7 +9,10 @@ export const Notes = ({ submitNotes }: NotesProps) => {
 
     return (
         <>
-            <h2 className='font-bold text-2xl mb-12 text-center'>Enter your study notes here</h2>
+            <div className='text-center mb-12'>
+                <h2 className='font-bold text-2xl mb-2'>Enter your study notes</h2>
+                <p className='text-sm text-gray-500 font-bold'>We will process the information and create up to 10 flash cards to test you</p>
+            </div>
             <textarea
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}

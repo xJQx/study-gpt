@@ -2,14 +2,14 @@ import React from 'react';
 
 interface FlashCardContentProps {
     title: string,
-    paragraph?: string
+    number?: string
 }
 
-export const FlashCardContent = ({ title, paragraph }: FlashCardContentProps) => {
+export const FlashCardContent = ({ title, number }: FlashCardContentProps) => {
     return (
         <div>
             <h3 className='font-bold text-2xl mb-4'>{ title }</h3>
-            <p>{ paragraph }</p>
+            <p className='text-md text-gray-500'>{ number }</p>
         </div>
     );
 };
