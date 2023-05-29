@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, use } from 'react';
 import { MenuLink, MenuLinkProps } from './MenuLink';
 import { Button } from '@/components';
 import Image from 'next/image';
 import { useDisclosure } from '@chakra-ui/react';
 import { UserModal } from '../UserModal';
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  getAuth,
+  onAuthStateChanged
+} from 'firebase/auth';
+import { auth } from '@/common/config/FirebaseService';
 
 interface MenuItemsProps {
   isOpen?: boolean;
@@ -12,11 +19,40 @@ interface MenuItemsProps {
 
 export const MenuItems = ({ isOpen = false, links }: MenuItemsProps) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currUser, setCurrUser] = useState<any>(null);
+
   const {
     isOpen: isProfileModalOpen,
     onOpen: onProfileModalOpen,
     onClose: onProfileModalClose
   } = useDisclosure();
+
+  const handleLogin = async () => {
+    const googleAuth = new GoogleAuthProvider();
+    await signInWithPopup(auth, googleAuth)
+      .then(res => {
+        setIsLoggedIn(true);
+      })
+      .catch(err => {
+        console.log('error', err);
+      });
+  };
+
+  useEffect(() => {
+    onAuthStateChanged(auth, user => {
+      if (user) {
+        setIsLoggedIn(true);
+        setCurrUser(user);
+        localStorage.setItem("userId",user.uid);
+
+        // console.log('user', user);
+      } else {
+        setIsLoggedIn(false);
+        setCurrUser(null);
+        localStorage.removeItem("userId");
+      }
+    });
+  }, []);
 
   return (
     <>
@@ -35,14 +71,14 @@ export const MenuItems = ({ isOpen = false, links }: MenuItemsProps) => {
         {/* CTA Button -> Login / Profile */}
         <div className="mt-4 lg:mt-0">
           {!isLoggedIn ? (
-            <Button onClick={() => setIsLoggedIn(true)}>Login</Button>
+            <Button onClick={() => handleLogin()}>Login</Button>
           ) : (
             <div
               className="relative w-[36px] h-[36px] cursor-pointer"
               onClick={onProfileModalOpen}
             >
               <Image
-                src="/person.jpg"
+                src={currUser ? currUser.photoURL : '/person.jpg'}
                 alt="profile picture"
                 fill={true}
                 className="rounded-full object-cover"
@@ -57,6 +93,7 @@ export const MenuItems = ({ isOpen = false, links }: MenuItemsProps) => {
           isOpen: isProfileModalOpen,
           onClose: onProfileModalClose
         }}
+        currUser={currUser}
       />
     </>
   );
