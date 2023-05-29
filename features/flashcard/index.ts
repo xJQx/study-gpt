@@ -1,1 +1,1 @@
-// Components
+export { FlashCardLayout } from './FlashCardLayout';
