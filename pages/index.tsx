@@ -1,3 +1,9 @@
+import { HomeHero } from '@/features/promo';
+
 export default function Home() {
-  return <div>Home</div>;
+  return (
+    <div>
+      <HomeHero />
+    </div>
+  );
 }
