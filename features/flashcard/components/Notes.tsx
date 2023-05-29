@@ -6,7 +6,6 @@ interface NotesProps {
 
 export const Notes = ({ submitNotes }: NotesProps) => {
   const [notes, setNotes] = useState('');
-  const [isApiPromptOpened, toggleApiPrompt] = useState(false);
 
   return (
     <>
