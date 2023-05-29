@@ -1,6 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
 import getGPTPrompt from '@/features/nlp/gptapi';
+import { db } from '../../../common/config/FirebaseService';
+import { ref, push } from 'firebase/database';
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,20 +14,46 @@ export default async function handler(
     const { text, APIkey } = body;
     //   const promptResult = await getGPTPrompt(text,APIkey);
     const promptResult = {
-      summary: "The summary of the topic",
-      quiz: [{ question: 'What is 1+1?', answer: '2' }]
+      summary: 'Send me your recommendations will ya?',
+      quiz: [
+        { question: 'What is 1+1?', answer: '2' },
+        { question: 'What is 1+3?', answer: '4' }
+      ]
     };
 
-    // add summary into firebase
+    // add summary into firebase realtime database
+    const putSummary = async (summary: string) => {
+      await push(ref(db, 'topic/'), {
+        userId: 'testing',
+        summary
+      }).then(async res => {
+        await putQuestions(promptResult.quiz, res.key);
+      });
+    };
 
-    return res.status(200).json({
-      data: {
-        message: 'Successfully created',
-        summary: promptResult.summary,
-        quiz: promptResult.quiz
+    // add questions into firebase realtime database
+    const putQuestions = async (questions: Array<any>, topicId: string) => {
+      await push(ref(db, 'questions/'), {
+        topicId,
+        questions
+      });
+    };
 
-      }
-    });
+    await putSummary(promptResult.summary)
+      .then(() => {
+        return res.status(200).json({
+          data: {
+            message: 'Successfully created',
+            summary: promptResult.summary,
+            quiz: promptResult.quiz
+          }
+        });
+      })
+      .catch((err: any) => {
+        return res.status(500).json({
+          message: 'Something went wrong'
+        });
+      });
   } else {
     return res.status(404).json({ message: 'Method not found' });
   }

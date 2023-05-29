@@ -1,6 +1,5 @@
 const { Configuration, OpenAIApi } = require('openai');
 
-
 let getGPTPrompt = async (notes: string,apiKey: string): Promise<any> => {
   const configuration = new Configuration({
     apiKey
