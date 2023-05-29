@@ -21,14 +21,17 @@ export const ExplainLayout = () => {
         userId: localStorage.getItem('userId'),
         text: sentInput,
         title: 'Generate explanation',
-        apiKey: localStorage.getItem('apiKey')
+        apiKey: localStorage.getItem('apiKey'),
+        hasQuestion:true
       }),
       headers: {
         'Content-Type': 'application/json'
       }
     }).then(async res => {
       const resultantResponse = await res.json();
+      console.log("resultantResponse",resultantResponse)
       const { notes } = resultantResponse.data;
+      console.log("notes",notes)
       setExplanation(notes);
     });
   };
