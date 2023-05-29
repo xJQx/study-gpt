@@ -74,7 +74,7 @@ export default async function handler(
     // For quantities calculated using other mathematical functions, the error can be estimated using numerical substitution, taking the difference between the largest or smallest possible value and the calculated value, whichever is greater`;
 
     const promptResult = await getGPTPrompt(text, apiKey);
-    // console.log(promptResult)
+    console.log('promptResult', promptResult);
     const result = JSON.parse(promptResult);
     const { summary, notes, quiz } = result;
 
@@ -106,7 +106,8 @@ export default async function handler(
             title,
             message: 'Successfully created',
             summary,
-            quiz
+            quiz,
+            notes
           }
         });
       })
