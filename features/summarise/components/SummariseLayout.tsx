@@ -9,15 +9,28 @@ export const SummariseLayout = () => {
   const [summarisedNotes, setSummarisedNotes] = useState('');
   const [isNotesInputOpened, toggleNotesInput] = useState(true);
 
-  function summarize(notes: string) {
+  const summarize = async (notes: string) => {
     setNotes(notes);
     // TODO: Send notes to api, receive response. If api did not return an error message, toggle to flash cards; otherwise
     // notify error to user
-    setSummarisedNotes(
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aliquam etiam erat velit scelerisque in dictum non?'
-    );
-    toggleNotesInput(false);
-  }
+    await fetch('/api/notes', {
+      method: 'POST',
+      body: JSON.stringify({
+        userId: localStorage.getItem('userId'),
+        text: notes,
+        title: 'idk bro',
+        apiKey: localStorage.getItem('apiKey')
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(async res => {
+      const resultantResponse = await res.json();
+      const { summary } = resultantResponse.data;
+      setSummarisedNotes(summary);
+      toggleNotesInput(false);
+    });
+  };
 
   return (
     <>

@@ -25,6 +25,7 @@ let getGPTPrompt = async (notes: string, apiKey: string): Promise<any> => {
     prompt,
     max_tokens: 1024
   });
+  console.log(completion.data)
   return completion.data.choices[0].text;
 };
 
