@@ -21,8 +21,8 @@ export const MenuItems = ({ isOpen = false, links }: MenuItemsProps) => {
         ))}
       </div>
 
-      {/* CTA Button -> Contact */}
-      <ButtonLink label="Contact" href="/contact" />
+      {/* CTA Button -> Login */}
+      <ButtonLink label="Login" href="/login" />
     </div>
   );
 };
