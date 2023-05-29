@@ -29,7 +29,7 @@ export const FlashCardLayout = ({ list, newTest }: FlashCardProps) => {
                 {
                     questionNo > 0
                     ? <button
-                        className='flex bg-gray-300 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded'
+                        className='flex bg-gray-300 hover:bg-gray-400 text-white py-2 px-4 rounded'
                         onClick={() => previousCard(true)}
                     >
                         Back
@@ -37,7 +37,7 @@ export const FlashCardLayout = ({ list, newTest }: FlashCardProps) => {
                     : <></>
                 }
                 <button
-                    className='flex justify-end ml-auto mr-0 bg-brand-red hover:bg-brand-pink text-white font-bold py-2 px-4 rounded'
+                    className='flex justify-end ml-auto mr-0 bg-brand-pink hover:bg-brand-red text-white py-2 px-4 rounded'
                     onClick={() => toggleAnsReveal(true)}
                 >
                     Answer
@@ -48,7 +48,7 @@ export const FlashCardLayout = ({ list, newTest }: FlashCardProps) => {
             <FlashCardContent title={ list[questionNo].answer } number={`Question ${questionNo + 1}/${list.length}`} />
             <div className='flex mt-8'>
                 <button
-                    className='flex bg-gray-300 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded'
+                    className='flex bg-gray-300 hover:bg-gray-400 text-white py-2 px-4 rounded'
                     onClick={() => previousCard(false)}
                 >
                     Back
@@ -56,13 +56,13 @@ export const FlashCardLayout = ({ list, newTest }: FlashCardProps) => {
                 {
                     questionNo < list.length - 1
                     ? <button
-                        className='flex justify-end ml-auto mr-0 bg-brand-red hover:bg-brand-pink text-white font-bold py-2 px-4 rounded'
+                        className='flex justify-end ml-auto mr-0 bg-brand-pink hover:bg-brand-red text-white py-2 px-4 rounded'
                         onClick={nextQuestion}
                     >
                         Next
                     </button>
                     : <button
-                        className='flex justify-end ml-auto mr-0 bg-brand-red hover:bg-brand-pink text-white font-bold py-2 px-4 rounded'
+                        className='flex justify-end ml-auto mr-0 bg-brand-pink hover:bg-brand-red text-white py-2 px-4 rounded'
                         onClick={newTest}
                     >
                         Back to Home

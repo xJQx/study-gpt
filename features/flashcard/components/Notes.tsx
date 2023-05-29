@@ -21,8 +21,8 @@ export const Notes = ({ submitNotes }: NotesProps) => {
                 required
             ></textarea>
             <button
-                className={`flex justify-end ml-auto mr-0 mt-2 font-bold py-2 px-4 rounded ${
-                    notes.length > 0 ? 'bg-brand-red hover:bg-brand-pink text-white' : ' bg-gray-200 text-gray-300 border-2'
+                className={`flex justify-end ml-auto mr-0 mt-2 py-2 px-4 rounded ${
+                    notes.length > 0 ? 'bg-brand-pink hover:bg-brand-red text-white' : ' bg-gray-200 text-gray-300 border-2'
                 }`}
                 onClick={() => submitNotes(notes)}
                 disabled={notes.length == 0}
