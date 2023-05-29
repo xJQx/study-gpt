@@ -1,3 +1,6 @@
+import React from 'react';
+import { FlashCardMainLayout } from '@/features/flashcard';
+
 export default function FlashCard() {
-  return <div>FlashCard</div>;
+  return <FlashCardMainLayout />;
 }
