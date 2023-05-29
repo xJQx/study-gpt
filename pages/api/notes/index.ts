@@ -1,17 +1,17 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
-import getGPTPrompt from '@/features/nlp/gptapi';
+// import getGPTPrompt from '@/features/nlp/gptapi';
 import { db } from '../../../common/config/FirebaseService';
 import { ref, push } from 'firebase/database';
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<any>
+  res: NextApiResponse<object>
 ) {
   // check the type of request
-  const { method, body } = req;
+  const { method } = req;
   if (method === 'POST') {
-    const { text, APIkey } = body;
+    // const { text, APIkey } = body;
     //   const promptResult = await getGPTPrompt(text,APIkey);
     const promptResult = {
       summary: 'Send me your recommendations will ya?',
@@ -32,11 +32,16 @@ export default async function handler(
     };
 
     // add questions into firebase realtime database
-    const putQuestions = async (questions: Array<any>, topicId: string) => {
-      await push(ref(db, 'questions/'), {
-        topicId,
-        questions
-      });
+    const putQuestions = async (
+      questions: Array<object>,
+      topicId: string | null
+    ) => {
+      if (topicId) {
+        await push(ref(db, 'questions/'), {
+          topicId,
+          questions
+        });
+      }
     };
 
     await putSummary(promptResult.summary)
@@ -49,7 +54,8 @@ export default async function handler(
           }
         });
       })
-      .catch((err: any) => {
+      .catch((err: Error) => {
+        console.log(err);
         return res.status(500).json({
           message: 'Something went wrong'
         });
