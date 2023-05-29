@@ -11,7 +11,7 @@ export default async function handler(
   // check the type of request
   const { method, body } = req;
   if (method === 'POST') {
-    const { text, APIkey, title } = body;
+    const { text, apiKey, title ,userId} = body;
 
     // const gptText =  `Topic 1: Measurement
     // Physical quantities and SI units
@@ -73,14 +73,14 @@ export default async function handler(
     // If a quantity is raised to the nth power, its fractional uncertainty is given by the fractional / percentage uncertainty of the quantity multiplied by the absolute value of the index, i.e. z = xn ⇒ Δz / z = |n| (Δx / x)
     // For quantities calculated using other mathematical functions, the error can be estimated using numerical substitution, taking the difference between the largest or smallest possible value and the calculated value, whichever is greater`;
 
-    const promptResult = await getGPTPrompt(text, APIkey);
+    const promptResult = await getGPTPrompt(text, apiKey);
     const result = JSON.parse(promptResult);
     const { summary, notes, quiz } = result;
 
     // add summary into firebase realtime database
     const putTopic = async () => {
       await push(ref(db, 'topic/'), {
-        userId: 'testing',
+        userId,
         title,
         summary,
         notes
