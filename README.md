@@ -29,7 +29,7 @@
 </p>
 
 <p align="center">
-    <a href="https://study-gpt.vercel.app/">View Demo</a>
+    <a href="https://youtu.be/Jt2MGMRuYDw">View Demo</a>
     ·
     <a href="https://github.com/xJQx/study-gpt/issues/new/choose">Report Bug</a>
     ·
@@ -39,7 +39,7 @@
 ## 👋🏻 Introducing `StudyGPT`
 
 <p align="center">
-    <a href="https://study-gpt.vercel.app/" target="_blank">
+    <a href="https://youtu.be/Jt2MGMRuYDw" target="_blank">
         <img src="./public/previews/study-gpt-landing-page.png" alt="StudyGPT landing page" />
     </a>
 </p>
@@ -54,8 +54,6 @@ Get ready to supercharge your learning journey with our powerful companion. Seam
 
 Here is a quick demo of the app. We hope you enjoy it.
 
-> [Website Demo Link](https://study-gpt.vercel.app/)
->
 > [YouTube Demo Link](https://youtu.be/Jt2MGMRuYDw)
 
 Liked it? Please give a ⭐️ to **StudyGPT**.
@@ -84,6 +82,34 @@ Retain knowledge for the long term and elevate your learning. Craft personalized
 
 <br />
 
+## 💪🏻 Try Yourself
+
+1. Get a copy of this repository by opening up your terminal and run:
+
+```bash
+git clone https://github.com/xJQx/study-gpt.git
+```
+
+2. Install dependencies
+
+```bash
+npm run install
+```
+
+3. Start up the application
+
+```bash
+npm run dev
+```
+
+4. Open http://localhost:3000/ in your browser, login, and enter your OpenAI API Key
+
+<br />
+
+Congratulations, you have successfully created your own copy of StudyGPT.
+
+<br />
+
 ## 🏗️ Tech Stack
 
 ![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
@@ -91,7 +117,6 @@ Retain knowledge for the long term and elevate your learning. Craft personalized
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Chakra](https://img.shields.io/badge/chakra-%234ED1C5.svg?style=for-the-badge&logo=chakraui&logoColor=white)
 ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
-![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 
 <br />
 

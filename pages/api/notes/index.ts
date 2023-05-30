@@ -4,7 +4,7 @@ import getGPTPrompt from '@/features/nlp/gptapi';
 import { db } from '../../../config/FirebaseService';
 import { ref, push, set } from 'firebase/database';
 
-export async function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<object>
 ) {
