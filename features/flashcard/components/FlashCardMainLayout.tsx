@@ -8,21 +8,25 @@ export const FlashCardMainLayout = () => {
   const [questions, setQuestions] = useState([{ question: '', answer: '' }]);
 
   async function generateCards(notes: string) {
-    const res = await fetch('/api/notes', {
-      method: 'POST',
-      body: JSON.stringify({
-        userId: localStorage.getItem('userId'),
-        text: notes,
-        title: 'Generate questions',
-        apiKey: localStorage.getItem('apiKey')
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-    const resJson = await res.json();
-    setQuestions(resJson.data.quiz);
-    toggleNotesView(false);
+    if (localStorage.getItem('apikey') == null) {
+      alert('Please add your API key in your profile');
+    } else {
+      const res = await fetch('/api/notes', {
+        method: 'POST',
+        body: JSON.stringify({
+          userId: localStorage.getItem('userId'),
+          text: notes,
+          title: 'Generate questions',
+          apiKey: localStorage.getItem('apiKey')
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const resJson = await res.json();
+      setQuestions(resJson.data.quiz);
+      toggleNotesView(false);
+    }
   }
 
   function newTest() {

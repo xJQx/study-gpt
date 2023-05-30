@@ -9,23 +9,27 @@ export const SummariseLayout = () => {
   const [isNotesInputOpened, toggleNotesInput] = useState(true);
 
   const summarize = async (notes: string) => {
-    await fetch('/api/notes', {
-      method: 'POST',
-      body: JSON.stringify({
-        userId: localStorage.getItem('userId'),
-        text: notes,
-        title: 'idk bro',
-        apiKey: localStorage.getItem('apiKey')
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(async res => {
-      const resultantResponse = await res.json();
-      const { summary } = resultantResponse.data;
-      setSummarisedNotes(summary);
-      toggleNotesInput(false);
-    });
+    if (localStorage.getItem('apikey') == null) {
+      alert('Please add your API key in your profile');
+    } else {
+      await fetch('/api/notes', {
+        method: 'POST',
+        body: JSON.stringify({
+          userId: localStorage.getItem('userId'),
+          text: notes,
+          title: 'idk bro',
+          apiKey: localStorage.getItem('apiKey')
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(async res => {
+        const resultantResponse = await res.json();
+        const { summary } = resultantResponse.data;
+        setSummarisedNotes(summary);
+        toggleNotesInput(false);
+      });
+    }
   };
 
   return (

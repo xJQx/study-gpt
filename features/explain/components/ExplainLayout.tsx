@@ -10,6 +10,10 @@ export const ExplainLayout = () => {
     setSentInput(input);
     setInput('');
     setExplanation('');
+    if (localStorage.getItem('apikey') == null) {
+      alert('Please add your API key in your profile');
+    } else {
+    }
     // TODO: Send notes to api, receive response. If api did not return an error message, toggle to flash cards; otherwise
     // notify error to user
     await fetch('/api/notes', {
