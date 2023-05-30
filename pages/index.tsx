@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div>
       <HomeHero />
-      <div className="p-16 w-full flex flex-col space-y-12">
+      <div className="p-16 w-full flex flex-col space-y-16">
         {appFeatureSections.map(appfeatureSection => (
           <AppFeatureSection
             key={appfeatureSection.title}
@@ -29,7 +29,8 @@ const appFeatureSections: AppFeatureSectionProps[] = [
       alt: 'summarise feature preview'
     },
     description:
-      'Save time and get a summarised version of your textbooks or homework in just seconds!',
+      'Unlock the essence of complex concepts effortlessly. \
+      Our summarization feature condenses lengthy and abstract notes into sleek summaries, giving you a sneak peek into the bigger picture.',
     href: '/summarise'
   },
   {
@@ -40,9 +41,8 @@ const appFeatureSections: AppFeatureSectionProps[] = [
       alt: 'explain feature preview'
     },
     description:
-      "Have a question or want to understand your academic content better? \
-      StudyGPT's Explain feature explains concepts to you in a simple and easy to understand way. \
-      Additionally, you can interact with StudyGPT to get further clarifications.",
+      'No more doubts holding you back! \
+      Our interactive platform provides instant, intelligent responses to your queries, empowering you to clarify new concepts whenever you need.',
     href: '/explain'
   },
   {
@@ -53,8 +53,8 @@ const appFeatureSections: AppFeatureSectionProps[] = [
       alt: 'flash card feature preview'
     },
     description:
-      "Tired of taking hours to manually create your own flash cards? Introducing to you StudyGPT's Flash Card feature! \
-      StudyGPT's Flash Card allows you to upload the texts that you want to be tested on and a compilation of flash cards will be generated just for you.",
+      "Retain knowledge for the long term and elevate your learning. \
+      Craft personalized flashcards based on your own notes, reinforcing your understanding of the concepts you've learned.",
     href: '/flash-card'
   }
 ];

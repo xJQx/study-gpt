@@ -43,8 +43,10 @@ export const ExplainLayout = () => {
         />
       </div>
       <div className="">
-        <div className="bg-gray-200 px-24 py-4">{sentInput}</div>
-        <div className="bg-white px-24 py-4">{explanation}</div>
+        {sentInput && <div className="bg-gray-200 px-24 py-4">{sentInput}</div>}
+        {explanation && (
+          <div className="bg-white px-24 py-4">{explanation}</div>
+        )}
       </div>
 
       <div className="flex gap-3 px-8 py-4 bg-gray-300 shadow">

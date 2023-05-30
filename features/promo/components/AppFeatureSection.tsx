@@ -30,9 +30,9 @@ export const AppFeatureSection = (props: AppFeatureSectionProps) => {
         <span className="font-semibold">{title}</span>
       </div>
       {/* Section Content */}
-      <div className="flex flex-col md:flex-row space-x-12">
+      <div className="flex flex-col md:flex-row space-x-0 md:space-x-12 space-y-8 md:space-y-0">
         {/* Image */}
-        <div className="relative w-[50%] h-[480px]">
+        <div className="relative w-[100%] md:w-[50%] h-[480px]">
           <Image
             src={src}
             alt={alt}
@@ -41,7 +41,7 @@ export const AppFeatureSection = (props: AppFeatureSectionProps) => {
           />
         </div>
         {/* Content */}
-        <div className="flex flex-col justify-center space-y-8 w-[50%]">
+        <div className="flex flex-col justify-center space-y-0 md:space-y-8 w-[100%] md:w-[50%]">
           <div className="text-[18px]">{description}</div>
           <div className="">
             <ButtonLink label="Try Now" href={href} />

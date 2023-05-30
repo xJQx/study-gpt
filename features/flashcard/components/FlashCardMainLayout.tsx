@@ -9,18 +9,18 @@ export const FlashCardMainLayout = () => {
 
   async function generateCards(notes: string) {
     const res = await fetch('/api/notes', {
-			method: 'POST',
-			body: JSON.stringify({
-				userId: localStorage.getItem('userId'),
-				text: notes,
-				title: 'Generate questions',
-				apiKey: localStorage.getItem('apiKey')
-			}),
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		})
-		const resJson = await res.json();
+      method: 'POST',
+      body: JSON.stringify({
+        userId: localStorage.getItem('userId'),
+        text: notes,
+        title: 'Generate questions',
+        apiKey: localStorage.getItem('apiKey')
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const resJson = await res.json();
     setQuestions(resJson.data.quiz);
     toggleNotesView(false);
   }
@@ -31,7 +31,7 @@ export const FlashCardMainLayout = () => {
   }
 
   return (
-    <div className="shadow p-10 bg-gray-100 mx-48 my-12 rounded-lg text-lg">
+    <div className="shadow bg-gray-100 p-4 lg:p-10 mx-12 md:mx-24 lg:mx-48 my-12 rounded-lg text-lg">
       {isNotesView ? (
         <Notes submitNotes={generateCards} />
       ) : (
@@ -39,4 +39,4 @@ export const FlashCardMainLayout = () => {
       )}
     </div>
   );
-}
+};

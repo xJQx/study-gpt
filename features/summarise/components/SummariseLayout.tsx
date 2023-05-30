@@ -30,13 +30,14 @@ export const SummariseLayout = () => {
 
   return (
     <>
-      <div className="shadow bg-gray-100 mx-48 my-12 rounded-lg text-lg">
-        <div className="p-10"></div>
-        <HeaderSubtitleCentered
-          title="Enter your content"
-          subTitle="We will process the information and summarise everything for you"
-        />
-        <div className="px-10 py-5 border-gray-300 border-t-2">
+      <div className="shadow bg-gray-100 p-4 lg:p-10 mx-12 md:mx-24 lg:mx-48 my-12 rounded-lg text-lg">
+        <div className="mt-8">
+          <HeaderSubtitleCentered
+            title="Enter your content"
+            subTitle="We will process the information and summarise everything for you"
+          />
+        </div>
+        <div className="px-8 py-5 border-gray-300 border-t-2">
           <div className="flex">
             <h3 className="font-bold text-xl">Your original content</h3>
             <div
@@ -48,7 +49,7 @@ export const SummariseLayout = () => {
           </div>
           {isNotesInputOpened ? <OriginalNotes summarize={summarize} /> : <></>}
         </div>
-        <div className="px-10 py-5 border-gray-300 border-t-2">
+        <div className="px-8 py-5 border-gray-300 border-t-2">
           <h3 className="font-bold text-xl">Summarised content</h3>
           <SummarisedNotes summarisedNotes={summarisedNotes} />
         </div>
