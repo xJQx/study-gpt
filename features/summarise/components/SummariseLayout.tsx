@@ -12,7 +12,7 @@ export const SummariseLayout = () => {
     if (localStorage.getItem('apiKey') == null) {
       alert('Please add your API key in your profile');
     } else {
-      await fetch('/api/notes', {
+      await fetch('/api/notes/summary', {
         method: 'POST',
         body: JSON.stringify({
           userId: localStorage.getItem('userId'),
@@ -25,8 +25,8 @@ export const SummariseLayout = () => {
         }
       }).then(async res => {
         const resultantResponse = await res.json();
-        const { summary } = resultantResponse.data;
-        setSummarisedNotes(summary);
+        const { data } = resultantResponse;
+        setSummarisedNotes(data);
         toggleNotesInput(false);
       });
     }
