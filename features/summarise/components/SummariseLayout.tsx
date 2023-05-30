@@ -17,7 +17,7 @@ export const SummariseLayout = () => {
         body: JSON.stringify({
           userId: localStorage.getItem('userId'),
           text: notes,
-          title: 'idk bro',
+          title: 'title',
           apiKey: localStorage.getItem('apiKey')
         }),
         headers: {
