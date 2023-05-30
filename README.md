@@ -25,7 +25,7 @@
 </p>
 
 <p align="center">
-    <a href="demo-link">View Demo</a>
+    <a href="https://study-gpt.vercel.app/">View Demo</a>
     ·
     <a href="https://github.com/xJQx/study-gpt/issues/new/choose">Report Bug</a>
     ·
@@ -35,7 +35,7 @@
 ## 👋🏻 Introducing `StudyGPT`
 
 <p align="center">
-    <a href="demo-link" target="_blank">
+    <a href="https://study-gpt.vercel.app/" target="_blank">
         <img src="./public/previews/study-gpt-landing-page.png" alt="StudyGPT landing page" />
     </a>
 </p>
@@ -50,7 +50,7 @@ Get ready to supercharge your learning journey with our powerful companion. Seam
 
 Here is a quick demo of the app. We hope you enjoy it.
 
-> [The Demo Link](demo-link)
+> [The Demo Link](https://study-gpt.vercel.app/)
 
 Liked it? Please give a ⭐️ to **StudyGPT**.
 
