@@ -4,7 +4,11 @@
 <img src="public/logo512.png" alt="StudyGPT" width="100" />
 </p>
 
-<h4 align="center"><b>Your Powerful All-In-One Learning Companion Powered by ChatGPT</b></h4>
+<h4 align="center">
+  <b>Your Powerful All-In-One Learning Companion Powered by ChatGPT</b>
+  <br /><br />
+  <a href="https://lifehack-23.devpost.com/">LifeHack 2023</a>
+</h4>
 
 <p align="center">
 <a href="https://github.com/xJQx/study-gpt/blob/master/LICENSE" target="blank">
@@ -88,6 +92,13 @@ Retain knowledge for the long term and elevate your learning. Craft personalized
 ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 
 <br />
+
+## Contributors
+
+<a href='https://github.com/xJQx' title='Jing Qiang'> <img src='https://avatars.githubusercontent.com/xJQx' height='75' width='75'/></a>
+<a href='https://github.com/DemonDia' title='Siang Meng'> <img src='https://avatars.githubusercontent.com/DemonDia' height='75' width='75'/></a>
+<a href='https://github.com/tantzeyeong' title='Tze Yeong'> <img src='https://avatars.githubusercontent.com/tantzeyeong' height='75' width='75'/></a>
+<a href='https://github.com/yantattan' title='Yan Tat'> <img src='https://avatars.githubusercontent.com/yantattan' height='75' width='75'/></a>
 
 ## 💡 Contributing
 
