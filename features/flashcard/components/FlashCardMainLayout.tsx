@@ -8,7 +8,7 @@ export const FlashCardMainLayout = () => {
   const [questions, setQuestions] = useState([{ question: '', answer: '' }]);
 
   async function generateCards(notes: string) {
-    if (localStorage.getItem('apikey') == null) {
+    if (localStorage.getItem('apiKey') == null) {
       alert('Please add your API key in your profile');
     } else {
       const res = await fetch('/api/notes', {

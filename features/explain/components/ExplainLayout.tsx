@@ -10,31 +10,29 @@ export const ExplainLayout = () => {
     setSentInput(input);
     setInput('');
     setExplanation('');
-    if (localStorage.getItem('apikey') == null) {
+    if (localStorage.getItem('apiKey') == null) {
       alert('Please add your API key in your profile');
     } else {
+      await fetch('/api/notes', {
+        method: 'POST',
+        body: JSON.stringify({
+          userId: localStorage.getItem('userId'),
+          text: sentInput,
+          title: 'Generate explanation',
+          apiKey: localStorage.getItem('apiKey'),
+          hasQuestion: true
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(async res => {
+        const resultantResponse = await res.json();
+        console.log('resultantResponse', resultantResponse);
+        const { notes } = resultantResponse.data;
+        console.log('notes', notes);
+        setExplanation(notes);
+      });
     }
-    // TODO: Send notes to api, receive response. If api did not return an error message, toggle to flash cards; otherwise
-    // notify error to user
-    await fetch('/api/notes', {
-      method: 'POST',
-      body: JSON.stringify({
-        userId: localStorage.getItem('userId'),
-        text: sentInput,
-        title: 'Generate explanation',
-        apiKey: localStorage.getItem('apiKey'),
-        hasQuestion: true
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(async res => {
-      const resultantResponse = await res.json();
-      console.log('resultantResponse', resultantResponse);
-      const { notes } = resultantResponse.data;
-      console.log('notes', notes);
-      setExplanation(notes);
-    });
   };
 
   return (

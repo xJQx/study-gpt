@@ -9,7 +9,7 @@ export const SummariseLayout = () => {
   const [isNotesInputOpened, toggleNotesInput] = useState(true);
 
   const summarize = async (notes: string) => {
-    if (localStorage.getItem('apikey') == null) {
+    if (localStorage.getItem('apiKey') == null) {
       alert('Please add your API key in your profile');
     } else {
       await fetch('/api/notes', {

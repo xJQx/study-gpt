@@ -21,6 +21,7 @@ export const ModalUser = ({ useDisclosure, currUser }: ModalUserProps) => {
 
   const saveApiKey = () => {
     localStorage.setItem('apiKey', apiKey ? apiKey : '');
+    useDisclosure.onClose();
   };
 
   const logoutUser = async () => {
