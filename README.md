@@ -54,7 +54,9 @@ Get ready to supercharge your learning journey with our powerful companion. Seam
 
 Here is a quick demo of the app. We hope you enjoy it.
 
-> [The Demo Link](https://study-gpt.vercel.app/)
+> [Website Demo Link](https://study-gpt.vercel.app/)
+>
+> [YouTube Demo Link](https://youtu.be/Jt2MGMRuYDw)
 
 Liked it? Please give a ⭐️ to **StudyGPT**.
 
@@ -93,12 +95,14 @@ Retain knowledge for the long term and elevate your learning. Craft personalized
 
 <br />
 
-## Contributors
+## ✨ Contributors
 
 <a href='https://github.com/xJQx' title='Jing Qiang'> <img src='https://avatars.githubusercontent.com/xJQx' height='75' width='75'/></a>
 <a href='https://github.com/DemonDia' title='Siang Meng'> <img src='https://avatars.githubusercontent.com/DemonDia' height='75' width='75'/></a>
 <a href='https://github.com/tantzeyeong' title='Tze Yeong'> <img src='https://avatars.githubusercontent.com/tantzeyeong' height='75' width='75'/></a>
 <a href='https://github.com/yantattan' title='Yan Tat'> <img src='https://avatars.githubusercontent.com/yantattan' height='75' width='75'/></a>
+
+<br />
 
 ## 💡 Contributing
 
