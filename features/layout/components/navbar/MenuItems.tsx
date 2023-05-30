@@ -1,15 +1,14 @@
-import React, { useState, useEffect, use } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MenuLink, MenuLinkProps } from './MenuLink';
-import { Button } from '@/components';
+import { Button, ModalUser } from '@/components';
 import Image from 'next/image';
 import { useDisclosure } from '@chakra-ui/react';
-import { UserModal } from '../UserModal';
 import {
   signInWithPopup,
   GoogleAuthProvider,
   onAuthStateChanged
 } from 'firebase/auth';
-import { auth } from '@/common/config/FirebaseService';
+import { auth } from '@/config/FirebaseService';
 
 interface MenuItemsProps {
   isOpen?: boolean;
@@ -19,7 +18,6 @@ interface MenuItemsProps {
 export const MenuItems = ({ isOpen = false, links }: MenuItemsProps) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currUser, setCurrUser] = useState<any>(null);
- 
 
   const {
     isOpen: isProfileModalOpen,
@@ -30,7 +28,7 @@ export const MenuItems = ({ isOpen = false, links }: MenuItemsProps) => {
   const handleLogin = async () => {
     const googleAuth = new GoogleAuthProvider();
     await signInWithPopup(auth, googleAuth)
-      .then(res => {
+      .then(() => {
         setIsLoggedIn(true);
       })
       .catch(err => {
@@ -43,14 +41,14 @@ export const MenuItems = ({ isOpen = false, links }: MenuItemsProps) => {
       if (user) {
         setIsLoggedIn(true);
         setCurrUser(user);
-        localStorage.setItem("userId",user.uid);
+        localStorage.setItem('userId', user.uid);
 
         // console.log('user', user);
       } else {
         setIsLoggedIn(false);
         setCurrUser(null);
-        localStorage.removeItem("userId");
-        localStorage.removeItem("apiKey");
+        localStorage.removeItem('userId');
+        localStorage.removeItem('apiKey');
       }
     });
   }, []);
@@ -79,7 +77,7 @@ export const MenuItems = ({ isOpen = false, links }: MenuItemsProps) => {
               onClick={onProfileModalOpen}
             >
               <Image
-                src={currUser ? currUser.photoURL : '/person.jpg'}
+                src={currUser ? currUser.photoURL : '/misc/default-profile.jpg'}
                 alt="profile picture"
                 fill={true}
                 className="rounded-full object-cover"
@@ -89,7 +87,7 @@ export const MenuItems = ({ isOpen = false, links }: MenuItemsProps) => {
         </div>
       </div>
 
-      <UserModal
+      <ModalUser
         useDisclosure={{
           isOpen: isProfileModalOpen,
           onClose: onProfileModalClose

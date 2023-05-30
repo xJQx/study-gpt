@@ -1,19 +1,18 @@
 import { Modal, ModalProps } from '@/components/Modal';
 import React, { useState, useEffect } from 'react';
 import { signOut } from 'firebase/auth';
-import { auth } from '@/common/config/FirebaseService';
+import { auth } from '@/config/FirebaseService';
 import { Input, InputGroup } from '@chakra-ui/react';
 import { Button } from '@/components';
 
-interface UserModalProps {
+interface ModalUserProps {
   useDisclosure: ModalProps['useDisclosure'];
   currUser: any;
 }
-// need to logout
 
-export const UserModal = ({ useDisclosure, currUser }: UserModalProps) => {
+export const ModalUser = ({ useDisclosure, currUser }: ModalUserProps) => {
   const [apiKey, setApiKey] = useState<string | null>('');
-  // const [isEditing,setIsEditing] = useState<boolean>(false);
+
   useEffect(() => {
     if (!(localStorage.getItem('apiKey') === null)) {
       setApiKey(localStorage.getItem('apiKey'));

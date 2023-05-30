@@ -1,7 +1,6 @@
 import React from 'react';
-// import {loginWithGoogle} from '@/features/authentication/auth';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import { auth } from '../common/config/FirebaseService';
+import { auth } from '../config/FirebaseService';
 
 function login() {
   const handleLogin = async () => {

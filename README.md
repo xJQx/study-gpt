@@ -1,38 +1,94 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h2 align="center"><b>StudyGPT</b></h2>
 
-## Getting Started
+<p align="center">
+<img src="public/logo512.png" alt="StudyGPT" width="100" />
+</p>
 
-First, run the development server:
+<h4 align="center"><b>Your Powerful All-In-One Learning Companion Powered by ChatGPT</b></h4>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+<p align="center">
+<a href="https://github.com/xJQx/study-gpt/blob/master/LICENSE" target="blank">
+<img src="https://img.shields.io/github/license/xJQx/study-gpt?style=flat-square" alt="licence" />
+</a>
+<a href="https://github.com/xJQx/study-gpt/fork" target="blank">
+<img src="https://img.shields.io/github/forks/xJQx/study-gpt?style=flat-square" alt="forks"/>
+</a>
+<a href="https://github.com/xJQx/study-gpt/stargazers" target="blank">
+<img src="https://img.shields.io/github/stars/xJQx/study-gpt?style=flat-square" alt="stars"/>
+</a>
+<a href="https://github.com/xJQx/study-gpt/issues" target="blank">
+<img src="https://img.shields.io/github/issues/xJQx/study-gpt?style=flat-square" alt="issues"/>
+</a>
+<a href="https://github.com/xJQx/study-gpt/pulls" target="blank">
+<img src="https://img.shields.io/github/issues-pr/xJQx/study-gpt?style=flat-square" alt="pull-requests"/>
+</a>
+</p>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<p align="center">
+    <a href="demo-link">View Demo</a>
+    ·
+    <a href="https://github.com/xJQx/study-gpt/issues/new/choose">Report Bug</a>
+    ·
+    <a href="https://github.com/xJQx/study-gpt/issues/new/choose">Request Feature</a>
+</p>
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## 👋🏻 Introducing `StudyGPT`
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+<p align="center">
+    <a href="demo-link" target="_blank">
+        <img src="./public/previews/study-gpt-landing-page.png" alt="StudyGPT landing page" />
+    </a>
+</p>
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Looking to take your learning to the next level? Introducing our Powerful All-In-One Learning Companion, `StudyGPT`! Packed with powerful features, it's designed to simplify your learning journey and maximize your potential.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Get ready to supercharge your learning journey with our powerful companion. Seamlessly log in, access concise summaries, clarify doubts at your convenience, and reinforce knowledge with personalized flashcards. Experience the future of learning - try it today!
 
-## Learn More
+<br />
 
-To learn more about Next.js, take a look at the following resources:
+## 🚀 Demo
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Here is a quick demo of the app. We hope you enjoy it.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+> [The Demo Link](demo-link)
 
-## Deploy on Vercel
+Liked it? Please give a ⭐️ to **StudyGPT**.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<br />
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 🔥 Features
+
+`StudyGPT` comes with 4 key features:
+
+#### Feature 1: Google Authentication
+
+Login seamlessly with your Google account for quick and secure access. Experience the perfect balance of convenience and top-notch security.
+
+#### Feature 2: Summarise
+
+Unlock the essence of complex concepts effortlessly. Our summarization feature condenses lengthy and abstract notes into sleek summaries, giving you a sneak peek into the bigger picture.
+
+#### Feature 3: Explain
+
+No more doubts holding you back! Our interactive platform provides instant, intelligent responses to your queries, empowering you to clarify new concepts whenever you need.
+
+#### Feature 4: Flashcard
+
+Retain knowledge for the long term and elevate your learning. Craft personalized flashcards based on your own notes, reinforcing your understanding of the concepts you've learned.
+
+<br />
+
+## 🏗️ Tech Stack
+
+![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Chakra](https://img.shields.io/badge/chakra-%234ED1C5.svg?style=for-the-badge&logo=chakraui&logoColor=white)
+![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
+![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
+
+<br />
+
+## 💡 Contributing
+
+Have an idea or improvement to make? Create an issue and make a pull request!

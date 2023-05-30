@@ -5,14 +5,10 @@ import { HeaderSubtitleCentered } from '@/components/HeaderSubtitleCentered';
 import { FaMinus, FaPlus } from 'react-icons/fa';
 
 export const SummariseLayout = () => {
-  const [notes, setNotes] = useState('');
   const [summarisedNotes, setSummarisedNotes] = useState('');
   const [isNotesInputOpened, toggleNotesInput] = useState(true);
 
   const summarize = async (notes: string) => {
-    setNotes(notes);
-    // TODO: Send notes to api, receive response. If api did not return an error message, toggle to flash cards; otherwise
-    // notify error to user
     await fetch('/api/notes', {
       method: 'POST',
       body: JSON.stringify({

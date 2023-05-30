@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 interface OriginalNotesProps {
-  summarize: (notes: string) => void;
+  summarize: (_: string) => void;
 }
 
 export const OriginalNotes = ({ summarize }: OriginalNotesProps) => {
