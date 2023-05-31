@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { HeaderSubtitleCentered } from '@/components/HeaderSubtitleCentered';
-
+import { LoadingContainer } from '@/components/LoadingContainer';
 export const ExplainLayout = () => {
   const [input, setInput] = useState('');
   const [sentInput, setSentInput] = useState('');
   const [explanation, setExplanation] = useState('');
+  const [loading, setLoading] = useState<boolean>(false);
 
   const explain = async () => {
     setSentInput(input);
@@ -13,6 +14,7 @@ export const ExplainLayout = () => {
     if (localStorage.getItem('apiKey') == null) {
       alert('Please add your API key in your profile');
     } else {
+      setLoading(true);
       await fetch('/api/notes/explain', {
         method: 'POST',
         body: JSON.stringify({
@@ -25,11 +27,17 @@ export const ExplainLayout = () => {
         headers: {
           'Content-Type': 'application/json'
         }
-      }).then(async res => {
-        const resultantResponse = await res.json();
-        const { data } = resultantResponse;
-        setExplanation(data);
-      });
+      })
+        .then(async res => {
+          const resultantResponse = await res.json();
+          const { data } = resultantResponse;
+          setExplanation(data);
+          setLoading(false);
+        })
+        .catch(() => {
+          setLoading(false);
+          alert('Something went wrong');
+        });
     }
   };
 
@@ -44,8 +52,15 @@ export const ExplainLayout = () => {
       </div>
       <div className="">
         {sentInput && <div className="bg-gray-200 px-24 py-4">{sentInput}</div>}
-        {explanation && (
-          <div className="bg-white px-24 py-4">{explanation}</div>
+        {loading ? (
+          <LoadingContainer text={'Generating explanation...'} />
+        ) : (
+          <>
+            {' '}
+            {explanation && (
+              <div className="bg-white px-24 py-4">{explanation}</div>
+            )}
+          </>
         )}
       </div>
 
