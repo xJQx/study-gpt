@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
-import getGPTPrompt from '@/features/nlp/gptapi';
+import { getGPTPrompt } from '@/features/nlp/gptapi';
 import { db } from '../../../config/FirebaseService';
 import { ref, push } from 'firebase/database';
 

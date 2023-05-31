@@ -61,4 +61,30 @@ let getGPTPrompt = async (
   };
 };
 
-export default getGPTPrompt;
+let getChatPrompt = async (
+  userInput: string,
+  apiKey: string,
+  messages: Array<any>
+): Promise<any> => {
+  const configuration = new Configuration({
+    apiKey
+  });
+  const openai = new OpenAIApi(configuration);
+  let tempMessages = messages;
+  tempMessages.push({ role: 'user', content: userInput });
+  const completion = await openai.createChatCompletion({
+    model: 'gpt-3.5-turbo',
+    messages: [
+      { role: 'system', content: 'Please answer with explanations' },
+      ...tempMessages
+    ]
+  });
+  return {
+    isJson: false,
+    data: completion.data.choices[0].message.content,
+    chat: tempMessages,
+    success: true
+  };
+};
+
+export { getGPTPrompt, getChatPrompt };
