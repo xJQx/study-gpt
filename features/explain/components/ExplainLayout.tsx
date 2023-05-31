@@ -4,7 +4,7 @@ import { Loader } from '@/components/Loader';
 import Image from 'next/image';
 import { getAuth } from 'firebase/auth';
 import { FaRobot } from 'react-icons/fa';
-import { toast, Toaster } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 
 export const ExplainLayout = () => {
   const [input, setInput] = useState('');
@@ -55,7 +55,6 @@ export const ExplainLayout = () => {
 
   return (
     <>
-      <Toaster />
       <div className="text-lg">
         <div className="p-10"></div>
         <HeaderSubtitleCentered

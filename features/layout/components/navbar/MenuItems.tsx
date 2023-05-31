@@ -9,6 +9,7 @@ import {
   onAuthStateChanged
 } from 'firebase/auth';
 import { auth } from '@/config/FirebaseService';
+import { toast } from 'react-hot-toast';
 
 interface MenuItemsProps {
   isOpen?: boolean;
@@ -30,9 +31,11 @@ export const MenuItems = ({ isOpen = false, links }: MenuItemsProps) => {
     await signInWithPopup(auth, googleAuth)
       .then(() => {
         setIsLoggedIn(true);
+        toast.success('Login successful.');
       })
       .catch(err => {
         console.log('error', err);
+        toast.error('Failed to login. Please try again later.');
       });
   };
 

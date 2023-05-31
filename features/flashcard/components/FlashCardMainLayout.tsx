@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FlashCardLayout } from './flashcard';
 import { Notes } from './Notes';
 import { Loader } from '@/components';
-import { toast, Toaster } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 
 export const FlashCardMainLayout = () => {
   const [isNotesView, toggleNotesView] = useState(true);
@@ -45,7 +45,6 @@ export const FlashCardMainLayout = () => {
 
   return (
     <>
-      <Toaster />
       <div className="shadow-lg bg-brand-neutral p-4 lg:p-10 mx-12 md:mx-24 lg:mx-48 my-12 rounded-lg text-lg transition hover:scale-105">
         {isNotesView ? (
           <>
