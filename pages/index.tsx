@@ -31,7 +31,7 @@ const appFeatureSections: AppFeatureSectionProps[] = [
     description:
       'Unlock the essence of complex concepts effortlessly. \
       Our summarization feature condenses lengthy and abstract notes into sleek summaries, giving you a sneak peek into the bigger picture.',
-    href: '/summariser'
+    href: '/summarise'
   },
   {
     index: '02.',
