@@ -46,7 +46,7 @@ export const ExplainLayout = () => {
       <div className="text-lg">
         <div className="p-10"></div>
         <HeaderSubtitleCentered
-          title="Explanation"
+          title="Explainer"
           subTitle="We will give you a simple yet detailed explanation on whatever doubts you have"
         />
       </div>

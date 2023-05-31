@@ -10,7 +10,7 @@ export const Notes = ({ submitNotes }: NotesProps) => {
   return (
     <>
       <div className="text-center mb-12">
-        <h2 className="font-bold text-2xl mb-2">Enter your study notes</h2>
+        <h2 className="font-bold text-2xl mb-2">Flash Cards</h2>
         <p className="text-sm text-gray-500 font-bold">
           We will process the information and create up to 10 flash cards to
           test you
