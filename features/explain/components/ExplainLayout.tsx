@@ -13,11 +13,11 @@ export const ExplainLayout = () => {
     if (localStorage.getItem('apiKey') == null) {
       alert('Please add your API key in your profile');
     } else {
-      await fetch('/api/notes', {
+      await fetch('/api/notes/explain', {
         method: 'POST',
         body: JSON.stringify({
           userId: localStorage.getItem('userId'),
-          text: sentInput,
+          text: input,
           title: 'Generate explanation',
           apiKey: localStorage.getItem('apiKey'),
           hasQuestion: true
@@ -27,10 +27,8 @@ export const ExplainLayout = () => {
         }
       }).then(async res => {
         const resultantResponse = await res.json();
-        console.log('resultantResponse', resultantResponse);
-        const { notes } = resultantResponse.data;
-        console.log('notes', notes);
-        setExplanation(notes);
+        const { data } = resultantResponse;
+        setExplanation(data);
       });
     }
   };

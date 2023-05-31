@@ -12,21 +12,27 @@ let getGPTPrompt = async (
   const openai = new OpenAIApi(configuration);
   let prompt = '';
   let isJson = false;
+  console.log("userInput",userInput)
   switch (mode) {
     // for summary
     case 0:
+      console.log('summary');
       prompt = userInput + `\n summarise the concepts of the notes above.`;
       isJson = false;
       break;
 
     // for explanation
     case 1:
+      console.log('explain');
       prompt = userInput + `\n Answer the question above, with explanations.`;
+      console.log('explain prompt', prompt);
+      // prompt = userInput;
       isJson = false;
       break;
 
     // for quiz
     case 2:
+      console.log('quiz');
       prompt =
         userInput +
         `\n With the content above, generate a set of questions and answers of the notes above, at least 5 questions. \n
