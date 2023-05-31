@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div>
       <HomeHero />
-      <div className="p-16 w-full flex flex-col space-y-16">
+      <div className="p-10 md:p-16 w-full flex flex-col space-y-24 md:space-y-32">
         {appFeatureSections.map(appfeatureSection => (
           <AppFeatureSection
             key={appfeatureSection.title}
@@ -23,7 +23,7 @@ export default function Home() {
 const appFeatureSections: AppFeatureSectionProps[] = [
   {
     index: '01.',
-    title: 'Summarise',
+    title: 'Summariser',
     img: {
       src: '/previews/summarise-preview.jpg',
       alt: 'summarise feature preview'
@@ -35,7 +35,7 @@ const appFeatureSections: AppFeatureSectionProps[] = [
   },
   {
     index: '02.',
-    title: 'Explain',
+    title: 'Explainer',
     img: {
       src: '/previews/explain-preview.jpg',
       alt: 'explain feature preview'
@@ -47,7 +47,7 @@ const appFeatureSections: AppFeatureSectionProps[] = [
   },
   {
     index: '03.',
-    title: 'Flash Card',
+    title: 'Flash Card Generator',
     img: {
       src: '/previews/flash-card-preview.jpg',
       alt: 'flash card feature preview'

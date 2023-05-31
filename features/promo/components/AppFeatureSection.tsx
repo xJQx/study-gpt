@@ -1,6 +1,7 @@
 import { ButtonLink } from '@/components';
 import React from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 export interface AppFeatureSectionProps {
   index: string;
@@ -23,7 +24,12 @@ export const AppFeatureSection = (props: AppFeatureSectionProps) => {
   } = props;
 
   return (
-    <div>
+    <motion.div
+      viewport={{ once: true }}
+      initial={{ opacity: 0, translateY: 200 }}
+      whileInView={{ opacity: 1, translateY: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       {/* Section Title */}
       <div className="mb-[16px] text-[32px]">
         <span className="text-brand-pink font-bold">{index}&nbsp;</span>
@@ -32,7 +38,7 @@ export const AppFeatureSection = (props: AppFeatureSectionProps) => {
       {/* Section Content */}
       <div className="flex flex-col md:flex-row space-x-0 md:space-x-12 space-y-8 md:space-y-0">
         {/* Image */}
-        <div className="relative w-[100%] md:w-[50%] h-[480px]">
+        <div className="relative w-[100%] md:w-[50%] h-[250px] md:h-[480px]">
           <Image
             src={src}
             alt={alt}
@@ -48,6 +54,6 @@ export const AppFeatureSection = (props: AppFeatureSectionProps) => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };

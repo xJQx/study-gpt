@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import { FlashCardLayout } from './flashcard';
 import { Notes } from './Notes';
 import { Loader } from '@/components';
+import { toast, Toaster } from 'react-hot-toast';
+
 export const FlashCardMainLayout = () => {
   const [isNotesView, toggleNotesView] = useState(true);
-  const [notes, setNotes] = useState('');
   const [questions, setQuestions] = useState([{ question: '', answer: '' }]);
   const [loading, setLoading] = useState<boolean>(false);
   async function generateCards(notes: string) {
     if (localStorage.getItem('apiKey') == null) {
-      alert('Please add your API key in your profile');
+      toast.error('Please add your API key in your profile.');
     } else {
       setLoading(true);
       await fetch('/api/notes/quiz', {
@@ -32,35 +33,37 @@ export const FlashCardMainLayout = () => {
         })
         .catch(() => {
           setLoading(false);
-          alert('Something went wrong');
+          toast.error('Something went wrong. Please try again later.');
         });
     }
   }
 
   function newTest() {
-    setNotes('');
     toggleNotesView(true);
-    setLoading(false)
+    setLoading(false);
   }
 
   return (
-    <div className="shadow bg-gray-100 p-4 lg:p-10 mx-12 md:mx-24 lg:mx-48 my-12 rounded-lg text-lg">
-      {isNotesView ? (
-        <>
-          {loading ? (
-            <>
-              <Loader text={'Generating flash cards...'} />
-            </>
-          ) : (
-            <>
-              {' '}
-              <Notes submitNotes={generateCards} />
-            </>
-          )}
-        </>
-      ) : (
-        <FlashCardLayout list={questions} newTest={newTest} />
-      )}
-    </div>
+    <>
+      <Toaster />
+      <div className="shadow-lg bg-brand-neutral p-4 lg:p-10 mx-12 md:mx-24 lg:mx-48 my-12 rounded-lg text-lg transition hover:scale-105">
+        {isNotesView ? (
+          <>
+            {loading ? (
+              <>
+                <Loader text={'Generating flash cards...'} />
+              </>
+            ) : (
+              <>
+                {' '}
+                <Notes submitNotes={generateCards} />
+              </>
+            )}
+          </>
+        ) : (
+          <FlashCardLayout list={questions} newTest={newTest} />
+        )}
+      </div>
+    </>
   );
 };

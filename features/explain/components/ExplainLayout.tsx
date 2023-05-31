@@ -1,18 +1,25 @@
-import React, { useState } from 'react';
+import React, { KeyboardEventHandler, useState } from 'react';
 import { HeaderSubtitleCentered } from '@/components/HeaderSubtitleCentered';
 import { Loader } from '@/components/Loader';
+import Image from 'next/image';
+import { getAuth } from 'firebase/auth';
+import { FaRobot } from 'react-icons/fa';
+import { toast, Toaster } from 'react-hot-toast';
+
 export const ExplainLayout = () => {
   const [input, setInput] = useState('');
   const [sentInput, setSentInput] = useState('');
   const [explanation, setExplanation] = useState('');
   const [loading, setLoading] = useState<boolean>(false);
 
+  const auth = getAuth();
+
   const explain = async () => {
     setSentInput(input);
     setInput('');
     setExplanation('');
     if (localStorage.getItem('apiKey') == null) {
-      alert('Please add your API key in your profile');
+      toast.error('Please add your API key in your profile.');
     } else {
       setLoading(true);
       await fetch('/api/notes/explain', {
@@ -36,13 +43,19 @@ export const ExplainLayout = () => {
         })
         .catch(() => {
           setLoading(false);
-          alert('Something went wrong');
+          toast.error('Something went wrong. Please try again later.');
         });
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleOnKeyUp: KeyboardEventHandler<HTMLInputElement> = (e: any) => {
+    if (e.key === 'Enter') explain();
+  };
+
   return (
     <>
+      <Toaster />
       <div className="text-lg">
         <div className="p-10"></div>
         <HeaderSubtitleCentered
@@ -51,34 +64,59 @@ export const ExplainLayout = () => {
         />
       </div>
       <div className="">
-        {sentInput && <div className="bg-gray-200 px-24 py-4">{sentInput}</div>}
+        {/* User's Input Text */}
+        {sentInput && (
+          <div className="bg-brand-neutral px-24 py-4 flex flex-row items-center">
+            {/* Profile Pic */}
+            <div className="self-start relative min-w-[36px] min-h-[36px] mr-4">
+              <Image
+                src={
+                  auth.currentUser?.photoURL
+                    ? auth.currentUser.photoURL
+                    : '/misc/default-profile.jpg'
+                }
+                alt="profile picture"
+                fill={true}
+                className="rounded-full object-cover"
+              />
+            </div>
+            <div>{sentInput}</div>
+          </div>
+        )}
+
+        {/* ChatGPT's Response Text */}
         {loading ? (
-          <Loader text={'Generating explanation...'} />
+          <div className="bg-gray-100">
+            <Loader text={'Generating explanation...'} />
+          </div>
         ) : (
           <>
-            {' '}
             {explanation && (
-              <div className="bg-white px-24 py-4">{explanation}</div>
+              <div className="bg-gray-100 px-24 py-4 flex flex-row items-center">
+                <FaRobot className="self-start mr-4 min-w-[32px] min-h-[32px]" />
+                {explanation}
+              </div>
             )}
           </>
         )}
       </div>
 
-      <div className="flex gap-3 px-8 py-4 bg-gray-300 shadow">
+      <div className="flex gap-3 px-8 py-4 bg-brand-neutral shadow">
         <input
           value={input}
           onChange={e => setInput(e.target.value)}
           className="w-full shadow-inner border-2 rounded-lg px-4 py-3"
           id="notesInput"
-          placeholder="Type your questions..."
+          placeholder="Type your questions or notes..."
           required
           autoComplete="off"
+          onKeyUp={handleOnKeyUp}
         />
         <button
-          className={`flex justify-end ml-auto mr-0 text-4xl align-middle pt-1 px-4 rounded-full ${
+          className={`flex self-center text-4xl px-[10px] rounded-full ${
             input.length > 0
               ? 'bg-brand-pink hover:bg-brand-red text-white'
-              : ' bg-gray-200 text-gray-300 border-2'
+              : ' bg-gray-300 text-gray-400'
           }`}
           onClick={explain}
           disabled={input.length == 0}

@@ -34,13 +34,13 @@ export const Modal = (props: ModalProps) => {
     <>
       <ChakraModal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent marginX="16px">
           <ModalHeader>{title}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>{children}</ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={button.onClick}>
+            <Button colorScheme="blue" onClick={button.onClick}>
               {button.label}
             </Button>
           </ModalFooter>

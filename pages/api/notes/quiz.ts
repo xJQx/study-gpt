@@ -15,7 +15,6 @@ export default async function handler(
     const { text, apiKey, title, userId } = body;
 
     const promptResult = await getGPTPrompt(text, apiKey, 2);
-    console.log("promptResult",promptResult)
     const { data, isJson, success } = promptResult;
     // result has:
     // data

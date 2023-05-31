@@ -21,7 +21,7 @@ export const OriginalNotes = ({ summarize }: OriginalNotesProps) => {
           className={`flex justify-end ml-auto mr-0 mt-2 py-2 px-4 rounded ${
             notes.length > 0
               ? 'bg-brand-pink hover:bg-brand-red text-white'
-              : ' bg-gray-200 text-gray-300 border-2'
+              : ' bg-gray-200 text-gray-300'
           }`}
           onClick={() => summarize(notes)}
           disabled={notes.length == 0}

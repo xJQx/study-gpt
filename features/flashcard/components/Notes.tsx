@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 interface NotesProps {
-  submitNotes: (notes: string) => void;
+  submitNotes: (_: string) => void;
 }
 
 export const Notes = ({ submitNotes }: NotesProps) => {
@@ -10,7 +10,7 @@ export const Notes = ({ submitNotes }: NotesProps) => {
   return (
     <>
       <div className="text-center mb-12">
-        <h2 className="font-bold text-2xl mb-2">Flash Cards</h2>
+        <h2 className="font-bold text-2xl mb-2">Flash Card Generator</h2>
         <p className="text-sm text-gray-500 font-bold">
           We will process the information and create up to 10 flash cards to
           test you
@@ -27,12 +27,12 @@ export const Notes = ({ submitNotes }: NotesProps) => {
         className={`flex justify-end ml-auto mr-0 mt-2 py-2 px-4 rounded ${
           notes.length > 0
             ? 'bg-brand-pink hover:bg-brand-red text-white'
-            : ' bg-gray-200 text-gray-300 border-2'
+            : ' bg-gray-200 text-gray-300'
         }`}
         onClick={() => submitNotes(notes)}
         disabled={notes.length == 0}
       >
-        Start Test
+        Generate
       </button>
     </>
   );

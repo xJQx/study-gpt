@@ -4,6 +4,7 @@ import { SummarisedNotes } from './SummarisedNotes';
 import { HeaderSubtitleCentered } from '@/components/HeaderSubtitleCentered';
 import { FaMinus, FaPlus } from 'react-icons/fa';
 import { Loader } from '@/components';
+import { toast, Toaster } from 'react-hot-toast';
 
 export const SummariseLayout = () => {
   const [summarisedNotes, setSummarisedNotes] = useState('');
@@ -12,7 +13,7 @@ export const SummariseLayout = () => {
 
   const summarize = async (notes: string) => {
     if (localStorage.getItem('apiKey') == null) {
-      alert('Please add your API key in your profile');
+      toast.error('Please add your API key in your profile.');
     } else {
       setLoading(true);
       await fetch('/api/notes/summary', {
@@ -36,17 +37,18 @@ export const SummariseLayout = () => {
         })
         .catch(() => {
           setLoading(false);
-          alert('Something went wrong');
+          toast.error('Something went wrong. Please try again later.');
         });
     }
   };
 
   return (
     <>
-      <div className="shadow bg-gray-100 p-4 lg:p-10 mx-12 md:mx-24 lg:mx-48 my-12 rounded-lg text-lg">
+      <Toaster />
+      <div className="shadow-lg bg-brand-neutral p-4 lg:p-10 mx-12 md:mx-24 lg:mx-48 my-12 rounded-lg text-lg transition hover:scale-105">
         <div className="mt-8">
           <HeaderSubtitleCentered
-            title="Summarizer"
+            title="Summariser"
             subTitle="We will process the information and summarise everything for you"
           />
         </div>
@@ -60,7 +62,7 @@ export const SummariseLayout = () => {
               {isNotesInputOpened ? <FaMinus /> : <FaPlus />}
             </div>
           </div>
-          {isNotesInputOpened ? <OriginalNotes summarize={summarize} /> : <></>}
+          {isNotesInputOpened && <OriginalNotes summarize={summarize} />}
         </div>
         <div className="px-8 py-5 border-gray-300 border-t-2">
           <h3 className="font-bold text-xl">Summarised content</h3>

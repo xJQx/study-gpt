@@ -42,8 +42,6 @@ export const MenuItems = ({ isOpen = false, links }: MenuItemsProps) => {
         setIsLoggedIn(true);
         setCurrUser(user);
         localStorage.setItem('userId', user.uid);
-
-        // console.log('user', user);
       } else {
         setIsLoggedIn(false);
         setCurrUser(null);
