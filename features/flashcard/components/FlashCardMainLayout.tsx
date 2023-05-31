@@ -11,7 +11,7 @@ export const FlashCardMainLayout = () => {
     if (localStorage.getItem('apiKey') == null) {
       alert('Please add your API key in your profile');
     } else {
-      const res = await fetch('/api/notes', {
+      const res = await fetch('/api/notes/quiz', {
         method: 'POST',
         body: JSON.stringify({
           userId: localStorage.getItem('userId'),
@@ -24,7 +24,8 @@ export const FlashCardMainLayout = () => {
         }
       });
       const resJson = await res.json();
-      setQuestions(resJson.data.quiz);
+      const { quiz } = resJson.data;
+      setQuestions(quiz);
       toggleNotesView(false);
     }
   }
