@@ -31,13 +31,14 @@ let getGPTPrompt = async (
         userInput +
         `\n With the content above, generate a set of questions and answers of the notes above, at least 5 questions. \n
         Put the generated output in the following JSON structure that is beautified, and the JSON must be valid: \n
-        
-              "quiz": [
-                {"question":"..", "answer":".."},
-                {"question":"..", "answer":".."},
-                ...
-              ]
-        `;
+{
+  "quiz": [
+    {"question":"Question 1", "answer":"Answer 1"},
+    {"question":"Question 2", "answer":"Answer 2"},
+    ...
+  ]
+}
+             `;
       isJson = true;
       break;
     default:

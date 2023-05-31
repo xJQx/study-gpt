@@ -40,6 +40,7 @@ export const FlashCardMainLayout = () => {
   function newTest() {
     setNotes('');
     toggleNotesView(true);
+    setLoading(false)
   }
 
   return (
