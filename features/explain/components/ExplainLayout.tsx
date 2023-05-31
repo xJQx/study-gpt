@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { HeaderSubtitleCentered } from '@/components/HeaderSubtitleCentered';
-import { LoadingContainer } from '@/components/LoadingContainer';
+import { Loader } from '@/components/Loader';
 export const ExplainLayout = () => {
   const [input, setInput] = useState('');
   const [sentInput, setSentInput] = useState('');
@@ -53,7 +53,7 @@ export const ExplainLayout = () => {
       <div className="">
         {sentInput && <div className="bg-gray-200 px-24 py-4">{sentInput}</div>}
         {loading ? (
-          <LoadingContainer text={'Generating explanation...'} />
+          <Loader text={'Generating explanation...'} />
         ) : (
           <>
             {' '}

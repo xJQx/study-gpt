@@ -3,4 +3,4 @@ export { ButtonLink } from './ButtonLink';
 export { HeaderSubtitleCentered } from './HeaderSubtitleCentered';
 export { Modal } from './Modal';
 export { ModalUser } from './ModalUser';
-export { LoadingContainer } from './LoadingContainer';
+export { Loader } from './Loader';

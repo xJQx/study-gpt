@@ -4,7 +4,7 @@ import React from 'react';
 interface LoaderProps {
   text: string;
 }
-export const LoadingContainer = ({ text }: LoaderProps) => {
+export const Loader = ({ text }: LoaderProps) => {
   return (
     <Container
       style={{
