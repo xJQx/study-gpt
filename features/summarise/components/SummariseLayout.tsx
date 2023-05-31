@@ -4,7 +4,7 @@ import { SummarisedNotes } from './SummarisedNotes';
 import { HeaderSubtitleCentered } from '@/components/HeaderSubtitleCentered';
 import { FaMinus, FaPlus } from 'react-icons/fa';
 import { Loader } from '@/components';
-import { toast, Toaster } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 
 export const SummariseLayout = () => {
   const [summarisedNotes, setSummarisedNotes] = useState('');
@@ -44,7 +44,6 @@ export const SummariseLayout = () => {
 
   return (
     <>
-      <Toaster />
       <div className="shadow-lg bg-brand-neutral p-4 lg:p-10 mx-12 md:mx-24 lg:mx-48 my-12 rounded-lg text-lg transition hover:scale-105">
         <div className="mt-8">
           <HeaderSubtitleCentered

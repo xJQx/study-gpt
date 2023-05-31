@@ -4,7 +4,8 @@ import { signOut } from 'firebase/auth';
 import { auth } from '@/config/FirebaseService';
 import { Input, InputGroup } from '@chakra-ui/react';
 import { Button } from '@/components';
-import { toast, Toaster } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
+import Link from 'next/link';
 
 interface ModalUserProps {
   useDisclosure: ModalProps['useDisclosure'];
@@ -39,7 +40,6 @@ export const ModalUser = ({ useDisclosure, currUser }: ModalUserProps) => {
   };
   return (
     <>
-      <Toaster />
       <Modal
         useDisclosure={useDisclosure}
         title="Settings"
@@ -50,36 +50,54 @@ export const ModalUser = ({ useDisclosure, currUser }: ModalUserProps) => {
           }
         }}
       >
-        <div>
-          <span className="font-semibold">Name: </span>
-          <span>{currUser ? <>{currUser.displayName}</> : <></>}</span>
-        </div>
-        <div>
-          <span className="font-semibold">Email: </span>
-          <span>{currUser ? <>{currUser.email}</> : <></>}</span>
-        </div>
-        <div>
-          <span className="font-semibold">API Key: </span>
-          <span>
-            <InputGroup size="md">
-              <Input
-                placeholder="Enter your OpenAI API key"
-                value={apiKey ? apiKey : ''}
-                onChange={e => {
-                  setApiKey(e.target.value);
-                }}
-              />
-              <Button
-                colorScheme="blue"
-                onClick={() => {
-                  saveApiKey();
-                }}
-                marginLeft="4px"
-              >
-                Save
-              </Button>
-            </InputGroup>
-          </span>
+        <div className="flex flex-col gap-1">
+          {/* Name */}
+          <div>
+            <span className="font-semibold">Name: </span>
+            <span>{currUser ? <>{currUser.displayName}</> : <></>}</span>
+          </div>
+
+          {/* Email */}
+          <div>
+            <span className="font-semibold">Email: </span>
+            <span>{currUser ? <>{currUser.email}</> : <></>}</span>
+          </div>
+
+          {/* API Key */}
+          <div>
+            <span className="font-semibold">API Key: </span>
+            <span>
+              <InputGroup size="md">
+                <Input
+                  placeholder="Enter your OpenAI API key"
+                  value={apiKey ? apiKey : ''}
+                  onChange={e => {
+                    setApiKey(e.target.value);
+                  }}
+                />
+                <Button
+                  colorScheme="blue"
+                  onClick={() => {
+                    saveApiKey();
+                  }}
+                  marginLeft="4px"
+                >
+                  Save
+                </Button>
+              </InputGroup>
+            </span>
+          </div>
+
+          {/* History */}
+          <div className="mt-1">
+            <Link
+              href="/history"
+              onClick={() => useDisclosure.onClose()}
+              className="underline text-[14px] hover:text-brand-red"
+            >
+              View History
+            </Link>
+          </div>
         </div>
       </Modal>
     </>

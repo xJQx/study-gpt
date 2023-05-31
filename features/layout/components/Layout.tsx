@@ -3,6 +3,7 @@ import { NavBarProps, Navbar } from './navbar';
 import { Footer } from './footer';
 import { TryNowRibbon } from '@/features/promo';
 import Head from 'next/head';
+import { Toaster } from 'react-hot-toast';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -37,6 +38,9 @@ export const Layout = ({ children }: LayoutProps) => {
       </Head>
 
       <div className="min-h-screen">
+        {/* Toaster */}
+        <Toaster />
+
         {/* Navbar */}
         <Navbar {...navbarProps} />
 
