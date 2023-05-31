@@ -13,7 +13,7 @@ export default async function handler(
   if (method === 'POST') {
     const { text, apiKey, title, userId } = body;
 
-    const promptResult = await getGPTPrompt(text, apiKey,0);
+    const promptResult = await getGPTPrompt(text, apiKey, 0);
     console.log('promptResult', promptResult);
     const result = JSON.parse(promptResult);
     const { summary, notes, quiz } = result;
