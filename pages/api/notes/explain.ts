@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
-import getGPTPrompt from '@/features/nlp/gptapi';
+import { getChatPrompt } from '@/features/nlp/gptapi';
 import { db } from '../../../config/FirebaseService';
 import { ref, push } from 'firebase/database';
 
@@ -12,10 +12,10 @@ export default async function handler(
   const { method, body } = req;
   if (method === 'POST') {
     let resultantContent: any;
-    const { text, apiKey, title, userId } = body;
+    const { messages, text, apiKey, title, userId } = body;
 
-    const promptResult = await getGPTPrompt(text, apiKey, 1);
-    const { data, isJson, success } = promptResult;
+    const promptResult = await getChatPrompt(text, apiKey, messages);
+    const { data, isJson, success, chat } = promptResult;
     // result has:
     // data
     // isJson
@@ -34,10 +34,11 @@ export default async function handler(
     await push(ref(db, 'explain/'), {
       userId,
       title,
-      explanation: resultantContent
+      content: resultantContent
     }).then(() => {
       return res.status(200).json({
-        data: resultantContent
+        data: resultantContent,
+        chat
       });
     });
   } else {
