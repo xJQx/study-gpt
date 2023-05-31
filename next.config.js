@@ -6,7 +6,9 @@ const nextConfig = {
   },
   images: {
     domains: ['lh3.googleusercontent.com']
-  }
+  },
+  basePath: process.env.NODE_ENV === 'production' ? '/study-gpt' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/study-gpt' : ''
 };
 
 module.exports = nextConfig;
