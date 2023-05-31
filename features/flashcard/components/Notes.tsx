@@ -12,8 +12,8 @@ export const Notes = ({ submitNotes }: NotesProps) => {
       <div className="text-center mb-12">
         <h2 className="font-bold text-2xl mb-2">Flash Card Generator</h2>
         <p className="text-sm text-gray-500 font-bold">
-          We will process the information and create up to 10 flash cards to
-          test you
+          We will process the information and create at least 5 flash cards for
+          you to test your knowledge
         </p>
       </div>
       <textarea

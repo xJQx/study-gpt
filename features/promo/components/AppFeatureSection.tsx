@@ -29,6 +29,7 @@ export const AppFeatureSection = (props: AppFeatureSectionProps) => {
       initial={{ opacity: 0, translateY: 200 }}
       whileInView={{ opacity: 1, translateY: 0 }}
       transition={{ duration: 0.5 }}
+      className="flex flex-col items-center"
     >
       {/* Section Title */}
       <div className="mb-[16px] text-[32px]">
@@ -43,7 +44,7 @@ export const AppFeatureSection = (props: AppFeatureSectionProps) => {
             src={src}
             alt={alt}
             fill={true}
-            style={{ objectFit: 'cover' }}
+            style={{ objectFit: 'contain' }}
           />
         </div>
         {/* Content */}

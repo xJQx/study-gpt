@@ -25,20 +25,20 @@ const appFeatureSections: AppFeatureSectionProps[] = [
     index: '01.',
     title: 'Summariser',
     img: {
-      src: '/previews/summarise-preview.jpg',
+      src: '/previews/summariser-preview.png',
       alt: 'summarise feature preview'
     },
     description:
       'Unlock the essence of complex concepts effortlessly. \
       Our summarization feature condenses lengthy and abstract notes into sleek summaries, giving you a sneak peek into the bigger picture.',
-    href: '/summarise'
+    href: '/summariser'
   },
   {
     index: '02.',
     title: 'Explainer',
     img: {
-      src: '/previews/explain-preview.jpg',
-      alt: 'explain feature preview'
+      src: '/previews/explainer-preview.png',
+      alt: 'explainer feature preview'
     },
     description:
       'No more doubts holding you back! \
@@ -49,7 +49,7 @@ const appFeatureSections: AppFeatureSectionProps[] = [
     index: '03.',
     title: 'Flash Card Generator',
     img: {
-      src: '/previews/flash-card-preview.jpg',
+      src: '/previews/flash-card-preview.png',
       alt: 'flash card feature preview'
     },
     description:
