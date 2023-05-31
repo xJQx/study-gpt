@@ -3,16 +3,19 @@ import { OriginalNotes } from './OriginalNotes';
 import { SummarisedNotes } from './SummarisedNotes';
 import { HeaderSubtitleCentered } from '@/components/HeaderSubtitleCentered';
 import { FaMinus, FaPlus } from 'react-icons/fa';
+import { Loader } from '@/components';
 
 export const SummariseLayout = () => {
   const [summarisedNotes, setSummarisedNotes] = useState('');
   const [isNotesInputOpened, toggleNotesInput] = useState(true);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const summarize = async (notes: string) => {
     if (localStorage.getItem('apiKey') == null) {
       alert('Please add your API key in your profile');
     } else {
-      await fetch('/api/notes', {
+      setLoading(true);
+      await fetch('/api/notes/summary', {
         method: 'POST',
         body: JSON.stringify({
           userId: localStorage.getItem('userId'),
@@ -23,12 +26,18 @@ export const SummariseLayout = () => {
         headers: {
           'Content-Type': 'application/json'
         }
-      }).then(async res => {
-        const resultantResponse = await res.json();
-        const { summary } = resultantResponse.data;
-        setSummarisedNotes(summary);
-        toggleNotesInput(false);
-      });
+      })
+        .then(async res => {
+          const resultantResponse = await res.json();
+          const { data } = resultantResponse;
+          setSummarisedNotes(data);
+          toggleNotesInput(false);
+          setLoading(false);
+        })
+        .catch(() => {
+          setLoading(false);
+          alert('Something went wrong');
+        });
     }
   };
 
@@ -37,7 +46,7 @@ export const SummariseLayout = () => {
       <div className="shadow bg-gray-100 p-4 lg:p-10 mx-12 md:mx-24 lg:mx-48 my-12 rounded-lg text-lg">
         <div className="mt-8">
           <HeaderSubtitleCentered
-            title="Enter your content"
+            title="Summarizer"
             subTitle="We will process the information and summarise everything for you"
           />
         </div>
@@ -55,7 +64,15 @@ export const SummariseLayout = () => {
         </div>
         <div className="px-8 py-5 border-gray-300 border-t-2">
           <h3 className="font-bold text-xl">Summarised content</h3>
-          <SummarisedNotes summarisedNotes={summarisedNotes} />
+          {loading ? (
+            <>
+              <Loader text={'Generating summary...'} />
+            </>
+          ) : (
+            <>
+              <SummarisedNotes summarisedNotes={summarisedNotes} />
+            </>
+          )}
         </div>
       </div>
     </>

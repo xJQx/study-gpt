@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { HeaderSubtitleCentered } from '@/components/HeaderSubtitleCentered';
-
+import { Loader } from '@/components/Loader';
 export const ExplainLayout = () => {
   const [input, setInput] = useState('');
   const [sentInput, setSentInput] = useState('');
   const [explanation, setExplanation] = useState('');
+  const [loading, setLoading] = useState<boolean>(false);
 
   const explain = async () => {
     setSentInput(input);
@@ -13,11 +14,12 @@ export const ExplainLayout = () => {
     if (localStorage.getItem('apiKey') == null) {
       alert('Please add your API key in your profile');
     } else {
-      await fetch('/api/notes', {
+      setLoading(true);
+      await fetch('/api/notes/explain', {
         method: 'POST',
         body: JSON.stringify({
           userId: localStorage.getItem('userId'),
-          text: sentInput,
+          text: input,
           title: 'Generate explanation',
           apiKey: localStorage.getItem('apiKey'),
           hasQuestion: true
@@ -25,13 +27,17 @@ export const ExplainLayout = () => {
         headers: {
           'Content-Type': 'application/json'
         }
-      }).then(async res => {
-        const resultantResponse = await res.json();
-        console.log('resultantResponse', resultantResponse);
-        const { notes } = resultantResponse.data;
-        console.log('notes', notes);
-        setExplanation(notes);
-      });
+      })
+        .then(async res => {
+          const resultantResponse = await res.json();
+          const { data } = resultantResponse;
+          setExplanation(data);
+          setLoading(false);
+        })
+        .catch(() => {
+          setLoading(false);
+          alert('Something went wrong');
+        });
     }
   };
 
@@ -40,14 +46,21 @@ export const ExplainLayout = () => {
       <div className="text-lg">
         <div className="p-10"></div>
         <HeaderSubtitleCentered
-          title="Explanation"
+          title="Explainer"
           subTitle="We will give you a simple yet detailed explanation on whatever doubts you have"
         />
       </div>
       <div className="">
         {sentInput && <div className="bg-gray-200 px-24 py-4">{sentInput}</div>}
-        {explanation && (
-          <div className="bg-white px-24 py-4">{explanation}</div>
+        {loading ? (
+          <Loader text={'Generating explanation...'} />
+        ) : (
+          <>
+            {' '}
+            {explanation && (
+              <div className="bg-white px-24 py-4">{explanation}</div>
+            )}
+          </>
         )}
       </div>
 
