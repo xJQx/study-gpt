@@ -1,10 +1,11 @@
-import React, { KeyboardEventHandler, useState, useEffect } from 'react';
+import React, { KeyboardEventHandler, useState } from 'react';
 import { HeaderSubtitleCentered } from '@/components/HeaderSubtitleCentered';
 import { Loader } from '@/components/Loader';
 import Image from 'next/image';
 import { getAuth } from 'firebase/auth';
 import { FaRobot } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
+import { publicFilePath } from '@/utils';
 
 export const ExplainLayout = () => {
   const [input, setInput] = useState('');
@@ -38,10 +39,9 @@ export const ExplainLayout = () => {
         }
       })
         .then(async res => {
-          const resultantResponse = await res.json();
-          const { data, chat } = resultantResponse;
+          const { data, chat: chats } = await res.json();
           setLoading(false);
-          let chats = chat;
+
           chats.push({ role: 'system', content: data });
           setConversations(chats);
           setSentInput('');
@@ -85,7 +85,7 @@ export const ExplainLayout = () => {
                         src={
                           auth.currentUser?.photoURL
                             ? auth.currentUser.photoURL
-                            : '/misc/default-profile.jpg'
+                            : publicFilePath('/misc/default-profile.jpg')
                         }
                         alt="profile picture"
                         fill={true}
@@ -116,7 +116,7 @@ export const ExplainLayout = () => {
                 src={
                   auth.currentUser?.photoURL
                     ? auth.currentUser.photoURL
-                    : '/misc/default-profile.jpg'
+                    : publicFilePath('/misc/default-profile.jpg')
                 }
                 alt="profile picture"
                 fill={true}

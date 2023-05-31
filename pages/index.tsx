@@ -3,6 +3,7 @@ import {
   AppFeatureSectionProps,
   HomeHero
 } from '@/features/promo';
+import { publicFilePath } from '@/utils';
 
 export default function Home() {
   return (
@@ -25,7 +26,7 @@ const appFeatureSections: AppFeatureSectionProps[] = [
     index: '01.',
     title: 'Summariser',
     img: {
-      src: '/previews/summariser-preview.png',
+      src: publicFilePath('/previews/summariser-preview.png'),
       alt: 'summarise feature preview'
     },
     description:
@@ -37,7 +38,7 @@ const appFeatureSections: AppFeatureSectionProps[] = [
     index: '02.',
     title: 'Explainer',
     img: {
-      src: '/previews/explainer-preview.png',
+      src: publicFilePath('/previews/explainer-preview.png'),
       alt: 'explainer feature preview'
     },
     description:
@@ -49,7 +50,7 @@ const appFeatureSections: AppFeatureSectionProps[] = [
     index: '03.',
     title: 'Flash Card Generator',
     img: {
-      src: '/previews/flash-card-preview.png',
+      src: publicFilePath('/previews/flash-card-preview.png'),
       alt: 'flash card feature preview'
     },
     description:

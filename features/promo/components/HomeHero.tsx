@@ -4,12 +4,13 @@ import Image from 'next/image';
 import { keyframes } from '@emotion/react';
 import Link from 'next/link';
 import { textLinearGradientClassName } from '@/styles/styles';
+import { publicFilePath } from '@/utils';
 
 export const HomeHero = () => {
   return (
     <Flex
       minH="90vh"
-      backgroundImage="/hero/tile-background.png"
+      backgroundImage={publicFilePath('/hero/tile-background.png')}
       backgroundSize={['100%', '100%', '75%', '50%']}
       backgroundPosition="center center"
       flexDirection="column"
@@ -58,7 +59,7 @@ export const HomeHero = () => {
         <Flex justifyContent="center" alignItems="center">
           <Box position="relative" boxSize={['0px', '0px', '150px', '200px']}>
             <Image
-              src="/hero/open-doodles-book.png"
+              src={publicFilePath('/hero/open-doodles-book.png')}
               alt="open doodles book image"
               fill={true}
             />
@@ -72,7 +73,7 @@ export const HomeHero = () => {
             boxSize={['280px', '350px', '350px', '400px']}
           >
             <Image
-              src="/hero/open-doodles-book.png"
+              src={publicFilePath('/hero/open-doodles-book.png')}
               alt="open doodles book image"
               fill={true}
             />
@@ -83,7 +84,7 @@ export const HomeHero = () => {
         <Flex justifyContent="center" alignItems="center">
           <Box position="relative" boxSize={['0px', '0px', '150px', '200px']}>
             <Image
-              src="/hero/open-doodles-book.png"
+              src={publicFilePath('/hero/open-doodles-book.png')}
               alt="open doodles book image"
               fill={true}
             />

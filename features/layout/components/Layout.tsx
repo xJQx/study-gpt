@@ -4,6 +4,7 @@ import { Footer } from './footer';
 import { TryNowRibbon } from '@/features/promo';
 import Head from 'next/head';
 import { Toaster } from 'react-hot-toast';
+import { publicFilePath } from '@/utils';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -25,13 +26,16 @@ export const Layout = ({ children }: LayoutProps) => {
         />
 
         {/* Icons */}
-        <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+        <link
+          rel="apple-touch-icon"
+          href={publicFilePath('apple-touch-icon.png')}
+        />
         {/* https://img.icons8.com/external-vitaliy-gorbachev-blue-vitaly-gorbachev/512/external-fox-origami-vitaliy-gorbachev-blue-vitaly-gorbachev.png */}
         <link
           rel="icon"
           type="image/png"
           sizes="32x32"
-          href="/favicon-32x32.png"
+          href={publicFilePath('/favicon-32x32.png')}
         />
 
         <title>StudyGPT</title>

@@ -10,6 +10,7 @@ import {
 } from 'firebase/auth';
 import { auth } from '@/config/FirebaseService';
 import { toast } from 'react-hot-toast';
+import { publicFilePath } from '@/utils';
 
 interface MenuItemsProps {
   isOpen?: boolean;
@@ -78,7 +79,11 @@ export const MenuItems = ({ isOpen = false, links }: MenuItemsProps) => {
               onClick={onProfileModalOpen}
             >
               <Image
-                src={currUser ? currUser.photoURL : '/misc/default-profile.jpg'}
+                src={
+                  currUser
+                    ? currUser.photoURL
+                    : publicFilePath('/misc/default-profile.jpg')
+                }
                 alt="profile picture"
                 fill={true}
                 className="rounded-full object-cover"
