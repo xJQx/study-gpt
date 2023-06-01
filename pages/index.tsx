@@ -1,9 +1,9 @@
 import {
   AppFeatureSection,
   AppFeatureSectionProps,
-  HomeHero
-} from '@/features/promo';
-import { publicFilePath } from '@/utils';
+  HomeHero,
+  TryNowRibbon
+} from '@/components/promo';
 
 export default function Home() {
   return (
@@ -17,6 +17,9 @@ export default function Home() {
           />
         ))}
       </div>
+
+      {/* CTA Ribbon */}
+      <TryNowRibbon href="/flash-card-generator" />
     </div>
   );
 }
@@ -26,36 +29,36 @@ const appFeatureSections: AppFeatureSectionProps[] = [
     index: '01.',
     title: 'Summariser',
     img: {
-      src: publicFilePath('/previews/summariser-preview.png'),
+      src: '/previews/summariser-preview.png',
       alt: 'summarise feature preview'
     },
     description:
       'Unlock the essence of complex concepts effortlessly. \
       Our summarization feature condenses lengthy and abstract notes into sleek summaries, giving you a sneak peek into the bigger picture.',
-    href: '/summarise'
+    href: '/summariser'
   },
   {
     index: '02.',
     title: 'Explainer',
     img: {
-      src: publicFilePath('/previews/explainer-preview.png'),
+      src: '/previews/explainer-preview.png',
       alt: 'explainer feature preview'
     },
     description:
       'No more doubts holding you back! \
       Our interactive platform provides instant, intelligent responses to your queries, empowering you to clarify new concepts whenever you need.',
-    href: '/explain'
+    href: '/explainer'
   },
   {
     index: '03.',
     title: 'Flash Card Generator',
     img: {
-      src: publicFilePath('/previews/flash-card-preview.png'),
+      src: '/previews/flash-card-preview.png',
       alt: 'flash card feature preview'
     },
     description:
       "Retain knowledge for the long term and elevate your learning. \
       Craft personalized flashcards based on your own notes, reinforcing your understanding of the concepts you've learned.",
-    href: '/flash-card'
+    href: '/flash-card-generator'
   }
 ];

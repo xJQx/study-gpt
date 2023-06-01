@@ -68,15 +68,15 @@ Liked it? Please give a ⭐️ to **StudyGPT**.
 
 Login seamlessly with your Google account for quick and secure access. Experience the perfect balance of convenience and top-notch security.
 
-#### Feature 2: Summarise
+#### Feature 2: Summariser
 
 Unlock the essence of complex concepts effortlessly. Our summarization feature condenses lengthy and abstract notes into sleek summaries, giving you a sneak peek into the bigger picture.
 
-#### Feature 3: Explain
+#### Feature 3: Explainer
 
 No more doubts holding you back! Our interactive platform provides instant, intelligent responses to your queries, empowering you to clarify new concepts whenever you need.
 
-#### Feature 4: Flashcard
+#### Feature 4: Flashcard Generator
 
 Retain knowledge for the long term and elevate your learning. Craft personalized flashcards based on your own notes, reinforcing your understanding of the concepts you've learned.
 

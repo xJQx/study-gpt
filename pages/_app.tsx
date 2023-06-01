@@ -1,4 +1,4 @@
-import { Layout } from '@/features/layout';
+import { Layout } from '@/components/layout';
 import '@/styles/globals.css';
 import { ChakraProvider } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';

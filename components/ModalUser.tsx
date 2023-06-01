@@ -1,7 +1,7 @@
 import { Modal, ModalProps } from '@/components/Modal';
 import React, { useState, useEffect } from 'react';
 import { signOut } from 'firebase/auth';
-import { auth } from '@/config/FirebaseService';
+import { auth } from '@/firebase/firebaseService';
 import { Input, InputGroup } from '@chakra-ui/react';
 import { Button } from '@/components';
 import { toast } from 'react-hot-toast';

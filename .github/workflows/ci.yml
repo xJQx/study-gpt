@@ -32,21 +32,9 @@ jobs:
 
       - name: Build
         env:
-          # Main firebase config
-          API_KEY: ${{ secrets.API_KEY }}
-          AUTH_DOMAIN: ${{ secrets.AUTH_DOMAIN }}
-          PROJECT_ID: ${{ secrets.PROJECT_ID }}
-          STORAGE_BUCKET: ${{ secrets.STORAGE_BUCKET }}
-          MESSAGING_SENDER_ID: ${{ secrets.MESSAGING_SENDER_ID }}
-          APP_ID: ${{ secrets.APP_ID }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-
-          # Firebase google auth
-          WEB_CLIENT_ID: ${{ secrets.WEB_CLIENT_ID }}
-          WEB_CLIENT_SECRET: ${{ secrets.WEB_CLIENT_SECRET }}
           OPEN_AI_API_KEY: ${{ secrets.OPEN_AI_API_KEY }}
 
-          # Nextjs
+          # Firebase
           NEXT_PUBLIC_API_KEY: ${{ secrets.NEXT_PUBLIC_API_KEY }}
           NEXT_PUBLIC_AUTH_DOMAIN: ${{ secrets.NEXT_PUBLIC_AUTH_DOMAIN }}
           NEXT_PUBLIC_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_PROJECT_ID }}
@@ -54,4 +42,8 @@ jobs:
           NEXT_PUBLIC_MESSAGING_SENDER_ID: ${{ secrets.NEXT_PUBLIC_MESSAGING_SENDER_ID }}
           NEXT_PUBLIC_APP_ID: ${{ secrets.NEXT_PUBLIC_APP_ID }}
           NEXT_PUBLIC_DATABASE_URL: ${{ secrets.NEXT_PUBLIC_DATABASE_URL }}
+
+          # Firebase google auth
+          WEB_CLIENT_ID: ${{ secrets.WEB_CLIENT_ID }}
+          WEB_CLIENT_SECRET: ${{ secrets.WEB_CLIENT_SECRET }}
         run: npm run build
