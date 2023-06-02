@@ -9,7 +9,7 @@ export default function Summariser() {
   const [summarisedNotes, setSummarisedNotes] = useState('');
 
   const [isNotesInputOpened, toggleNotesInput] = useState(true);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const summarize = async (notes: string) => {
     if (localStorage.getItem('apiKey') === null) {
@@ -17,32 +17,38 @@ export default function Summariser() {
       return;
     }
 
-    setLoading(true);
+    setIsLoading(true);
 
     // API request
-    await fetch('/api/summary', {
-      method: 'POST',
-      body: JSON.stringify({
-        userId: localStorage.getItem('userId'),
-        text: notes,
-        title: 'title',
-        apiKey: localStorage.getItem('apiKey')
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(async res => {
-        const resultantResponse = await res.json();
-        const { data } = resultantResponse;
-        setSummarisedNotes(data);
-        toggleNotesInput(false);
-        setLoading(false);
-      })
-      .catch(() => {
-        setLoading(false);
-        toast.error('Something went wrong. Please try again later.');
+    try {
+      const response = await fetch('/api/summary', {
+        method: 'POST',
+        body: JSON.stringify({
+          prompt: notes,
+          apiKey: localStorage.getItem('apiKey')
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       });
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      const data = await response.json();
+      if (!data) {
+        return;
+      }
+      const { summary } = data;
+
+      setSummarisedNotes(summary);
+      toggleNotesInput(false);
+      setIsLoading(false);
+    } catch (e) {
+      setIsLoading(false);
+      toast.error('Something went wrong. Please try again later.');
+      console.error(e);
+    }
   };
 
   return (
@@ -78,7 +84,7 @@ export default function Summariser() {
       {/* Summarised Content */}
       <div className="px-8 py-5 border-gray-300 border-t-2">
         <h3 className="font-bold text-xl">Summarised content</h3>
-        {loading ? (
+        {isLoading ? (
           <>
             <Loader text={'Generating summary...'} />
           </>

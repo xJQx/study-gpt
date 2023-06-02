@@ -8,7 +8,7 @@ export default function FlashCardGenerator() {
   const [flashCardList, setFlashCardList] = useState<
     Array<{ question: string; answer: string }>
   >([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const generateFlashCards = async (notes: string) => {
     if (localStorage.getItem('apiKey') === null) {
@@ -16,36 +16,38 @@ export default function FlashCardGenerator() {
       return;
     }
 
-    setLoading(true);
+    setIsLoading(true);
 
     // API request
-    await fetch('/api/flashcard', {
-      method: 'POST',
-      body: JSON.stringify({
-        userId: localStorage.getItem('userId'),
-        text: notes,
-        title: 'Generate questions',
-        apiKey: localStorage.getItem('apiKey')
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(async res => {
-        const resJson = await res.json();
-        const { quiz: flashcardList } = resJson.data;
-        setFlashCardList(flashcardList);
-        toggleEnterNotesView(false);
-      })
-      .catch(() => {
-        setLoading(false);
-        toast.error('Something went wrong. Please try again later.');
+    try {
+      const response = await fetch('/api/flashcard', {
+        method: 'POST',
+        body: JSON.stringify({
+          prompt: notes,
+          apiKey: localStorage.getItem('apiKey')
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       });
+
+      const data = await response.json();
+      if (!data) {
+        return;
+      }
+      const { flashCardList } = data;
+
+      setFlashCardList(flashCardList);
+      toggleEnterNotesView(false);
+    } catch (e) {
+      setIsLoading(false);
+      toast.error('Something went wrong. Please try again later.');
+    }
   };
 
   const generateNewFlashCard = () => {
     toggleEnterNotesView(true);
-    setLoading(false);
+    setIsLoading(false);
   };
 
   return (
@@ -53,7 +55,7 @@ export default function FlashCardGenerator() {
       <div className="shadow-lg bg-brand-neutral p-4 lg:p-10 mx-12 md:mx-24 lg:mx-48 my-12 rounded-lg text-lg transition hover:scale-105">
         {isEnterNotesView ? (
           <>
-            {loading ? (
+            {isLoading ? (
               <>
                 <Loader text={'Generating flash cards...'} />
               </>

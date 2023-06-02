@@ -1,48 +1,53 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { getChatPrompt } from '@/gpt/gptapi';
-import { ref, push } from 'firebase/database';
-import { db } from '@/firebase/firebaseService';
+import type { NextApiResponse } from 'next';
+import { generateGPTStreamWithContext } from '@/openai/gptapi';
+import { parseStream } from '@/openai/utils';
+import { NextRequest, NextResponse } from 'next/server';
+import { ParsedEvent, ReconnectInterval } from 'eventsource-parser';
 
 export const config = {
   runtime: 'edge'
 };
 
 export default async function handler(
-  req: NextApiRequest,
+  req: NextRequest,
   res: NextApiResponse<object>
 ) {
-  const { method, body } = req;
+  const { method } = req;
 
   // Post Request
   if (method === 'POST') {
-    let resultantContent: any;
-    const { messages, text, apiKey, title, userId } = body;
+    const { prompt, apiKey, messages } = await req.json();
 
-    const promptResult = await getChatPrompt(text, apiKey, messages);
-    const { data, isJson, success, chat } = promptResult;
+    const stream = (
+      await generateGPTStreamWithContext(
+        prompt,
+        apiKey,
+        'You will give clear and easy to understand explanations',
+        messages
+      )
+    ).body;
 
-    if (!success) {
-      return res.status(500).json({
-        message: 'Something went wrong'
-      });
-    }
-    if (isJson) {
-      resultantContent = JSON.parse(data);
-    } else {
-      resultantContent = data;
+    if (!stream) {
+      return NextResponse.json({ explanation: '' });
     }
 
-    await push(ref(db, 'explain/'), {
-      userId,
-      title,
-      content: resultantContent
-    }).then(() => {
-      return res.status(200).json({
-        data: resultantContent,
-        chat
-      });
-    });
+    let result = '';
+
+    const onParse = (event: ParsedEvent | ReconnectInterval) => {
+      if (event.type === 'event') {
+        const data = event.data;
+        try {
+          result += JSON.parse(data).text ?? '';
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    };
+
+    await parseStream(stream, onParse);
+
+    return NextResponse.json({ explanation: result });
   } else {
     return res.status(404).json({ message: 'Method not found' });
   }

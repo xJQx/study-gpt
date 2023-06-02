@@ -4,12 +4,13 @@ import Image from 'next/image';
 import { getAuth } from 'firebase/auth';
 import { FaRobot } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
+import { ChatGPTAgent } from '@/openai/OpenAIStream';
 
 export default function Explainer() {
-  const [currentInput, setInput] = useState('');
-  const [lastInput, setLastInput] = useState('');
+  const [newPrompt, setNewPrompt] = useState('');
+  const [lastPrompt, setLastPrompt] = useState('');
   const [conversations, setConversations] = useState<
-    Array<{ role: string; content: string }>
+    Array<{ role: ChatGPTAgent; content: string }>
   >([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -21,38 +22,46 @@ export default function Explainer() {
       return;
     }
 
-    setLastInput(currentInput);
-    setInput('');
+    setLastPrompt(newPrompt);
+    setNewPrompt('');
     setIsLoading(true);
 
     // API request
-    fetch('/api/explain', {
-      method: 'POST',
-      body: JSON.stringify({
-        userId: localStorage.getItem('userId'),
-        messages: conversations,
-        text: currentInput,
-        title: 'Generate explanation',
-        apiKey: localStorage.getItem('apiKey'),
-        hasQuestion: true
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(async res => {
-        const { data, chat: chats } = await res.json();
-        setIsLoading(false);
-
-        chats.push({ role: 'system', content: data });
-        setConversations(chats);
-        setLastInput('');
-      })
-      .catch(e => {
-        console.log(e);
-        setIsLoading(false);
-        toast.error('Something went wrong. Please try again later.');
+    try {
+      const response = await fetch('/api/explain', {
+        method: 'POST',
+        body: JSON.stringify({
+          prompt: newPrompt,
+          apiKey: localStorage.getItem('apiKey'),
+          messages: conversations
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       });
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      const data = await response.json();
+      if (!data) {
+        return;
+      }
+      const { explanation } = data;
+
+      setConversations([
+        ...conversations,
+        { role: 'user', content: newPrompt },
+        { role: 'system', content: explanation }
+      ]);
+      setLastPrompt('');
+      setIsLoading(false);
+    } catch (e) {
+      console.log(e);
+      setIsLoading(false);
+      toast.error('Something went wrong. Please try again later.');
+    }
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -111,7 +120,7 @@ export default function Explainer() {
           );
         })}
 
-        {lastInput && (
+        {lastPrompt && (
           <div className="bg-brand-neutral px-24 py-4 flex flex-row items-center">
             <div className="self-start relative min-w-[36px] min-h-[36px] mr-4">
               <Image
@@ -125,7 +134,7 @@ export default function Explainer() {
                 className="rounded-full object-cover"
               />
             </div>
-            <div>{lastInput}</div>
+            <div>{lastPrompt}</div>
           </div>
         )}
 
@@ -140,8 +149,8 @@ export default function Explainer() {
       {/* Input */}
       <div className="flex gap-3 px-8 py-4 bg-brand-neutral shadow">
         <input
-          value={currentInput}
-          onChange={e => setInput(e.target.value)}
+          value={newPrompt}
+          onChange={e => setNewPrompt(e.target.value)}
           className="w-full shadow-inner border-2 rounded-lg px-4 py-3"
           id="notesInput"
           placeholder="Type your questions or notes..."
@@ -151,12 +160,12 @@ export default function Explainer() {
         />
         <button
           className={`flex self-center text-4xl px-[10px] rounded-full ${
-            currentInput.length > 0
+            newPrompt.length > 0
               ? 'bg-brand-pink hover:bg-brand-red text-white'
               : ' bg-gray-300 text-gray-400'
           }`}
           onClick={explain}
-          disabled={currentInput.length == 0}
+          disabled={newPrompt.length == 0}
         >
           ↵
         </button>

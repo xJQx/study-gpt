@@ -1,49 +1,61 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { GPT_MODE, getGPTPrompt } from '@/gpt/gptapi';
-import { ref, push } from 'firebase/database';
-import { db } from '@/firebase/firebaseService';
+import type { NextApiResponse } from 'next';
+import { generateGPTStream } from '@/openai/gptapi';
+import { NextRequest, NextResponse } from 'next/server';
+import { ParsedEvent, ReconnectInterval } from 'eventsource-parser';
+import { parseStream } from '@/openai/utils';
 
 export const config = {
   runtime: 'edge'
 };
 
 export default async function handler(
-  req: NextApiRequest,
+  req: NextRequest,
   res: NextApiResponse<object>
 ) {
-  const { method, body } = req;
+  const { method } = req;
 
   // Post Request
   if (method === 'POST') {
-    let resultantContent: any;
-    const { text, apiKey, title, userId } = body;
+    const { prompt, apiKey } = await req.json();
 
-    const promptResult = await getGPTPrompt(
-      text,
-      apiKey,
-      GPT_MODE.FLASH_CARD_GENERATOR
-    );
-    const { data, isJson, success } = promptResult;
+    const stream = (
+      await generateGPTStream(
+        `Generate at 1 set of at least 5 questions and answers for the given content, in the following specified JSON format =
+    {
+      "quiz": [
+        {"question":"Question 1", "answer":"Answer 1"},
+        {"question":"Question 2", "answer":"Answer 2"}
+      ]
+    }\n\nContent=\n` + prompt,
+        apiKey
+      )
+    ).body;
 
-    if (!success) {
-      return res.status(500).json({
-        message: 'Something went wrong'
-      });
+    if (!stream) {
+      return NextResponse.json({ flashCardList: [] });
     }
-    if (isJson) {
-      resultantContent = JSON.parse(data);
-    } else {
-      resultantContent = data;
-    }
-    await push(ref(db, 'quiz/'), {
-      userId,
-      title,
-      quiz: resultantContent.quiz
-    }).then(() => {
-      return res.status(200).json({
-        data: resultantContent
-      });
+
+    let result = '';
+
+    const onParse = (event: ParsedEvent | ReconnectInterval) => {
+      if (event.type === 'event') {
+        const data = event.data;
+        try {
+          result += JSON.parse(data).text ?? '';
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    };
+
+    await parseStream(stream, onParse);
+
+    if (!result.startsWith('{')) result = '{' + result; // gpt not returning the starting '{'
+    const flashCardList = JSON.parse(result).quiz;
+
+    return NextResponse.json({
+      flashCardList: flashCardList
     });
   } else {
     return res.status(404).json({ message: 'Method not found' });

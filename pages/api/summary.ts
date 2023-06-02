@@ -1,46 +1,51 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { GPT_MODE, getGPTPrompt } from '@/gpt/gptapi';
-import { ref, push } from 'firebase/database';
-import { db } from '@/firebase/firebaseService';
+import type { NextApiResponse } from 'next';
+import { generateGPTStream } from '@/openai/gptapi';
+import { NextRequest, NextResponse } from 'next/server';
+import { ParsedEvent, ReconnectInterval } from 'eventsource-parser';
+import { parseStream } from '@/openai/utils';
 
 export const config = {
   runtime: 'edge'
 };
 
 export default async function handler(
-  req: NextApiRequest,
+  req: NextRequest,
   res: NextApiResponse<object>
 ) {
-  const { method, body } = req;
+  const { method } = req;
 
   // Post Request
   if (method === 'POST') {
-    let resultantContent: any;
-    const { text, apiKey, title, userId } = body;
+    const { prompt, apiKey } = await req.json();
 
-    const promptResult = await getGPTPrompt(text, apiKey, GPT_MODE.SUMMARISER);
-    const { data, isJson, success } = promptResult;
+    const stream = (
+      await generateGPTStream(
+        'Summarise the key concepts of the following notes =\n' + prompt,
+        apiKey
+      )
+    ).body;
 
-    if (!success) {
-      return res.status(500).json({
-        message: 'Something went wrong'
-      });
+    if (!stream) {
+      return NextResponse.json({ summary: '' });
     }
-    if (isJson) {
-      resultantContent = JSON.parse(data);
-    } else {
-      resultantContent = data;
-    }
-    await push(ref(db, 'summary/'), {
-      userId,
-      title,
-      summary: resultantContent
-    }).then(() => {
-      return res.status(200).json({
-        data: resultantContent
-      });
-    });
+
+    let summary = '';
+
+    const onParse = (event: ParsedEvent | ReconnectInterval) => {
+      if (event.type === 'event') {
+        const data = event.data;
+        try {
+          summary += JSON.parse(data).text ?? '';
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    };
+
+    await parseStream(stream, onParse);
+
+    return NextResponse.json({ summary: summary });
   } else {
     return res.status(404).json({ message: 'Method not found' });
   }
