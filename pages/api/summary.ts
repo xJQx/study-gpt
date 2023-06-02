@@ -4,6 +4,10 @@ import { GPT_MODE, getGPTPrompt } from '@/gpt/gptapi';
 import { ref, push } from 'firebase/database';
 import { db } from '@/firebase/firebaseService';
 
+export const config = {
+  runtime: 'edge'
+};
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<object>
