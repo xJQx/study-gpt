@@ -29,7 +29,7 @@
 </p>
 
 <p align="center">
-    <a href="https://youtu.be/hL6o276WFLU">View Demo</a>
+    <a href="https://study-gpt.vercel.app/">View Demo</a>
     ·
     <a href="https://github.com/xJQx/study-gpt/issues/new/choose">Report Bug</a>
     ·
@@ -39,7 +39,7 @@
 ## 👋🏻 Introducing `StudyGPT`
 
 <p align="center">
-    <a href="https://youtu.be/hL6o276WFLU" target="_blank">
+    <a href="https://study-gpt.vercel.app/" target="_blank">
         <img src="./public/previews/study-gpt-landing-page.png" alt="StudyGPT landing page" />
     </a>
 </p>
@@ -54,6 +54,8 @@ Get ready to supercharge your learning journey with our powerful companion. Seam
 
 Here is a quick demo of the app. We hope you enjoy it.
 
+> [Website Demo Link](https://study-gpt.vercel.app/)
+>
 > [YouTube Demo Link](https://youtu.be/hL6o276WFLU)
 
 Liked it? Please give a ⭐️ to **StudyGPT**.
