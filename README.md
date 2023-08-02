@@ -98,13 +98,36 @@ git clone https://github.com/xJQx/study-gpt.git
 npm run install
 ```
 
-3. Start up the application
+3. Set up Environment Variables
+
+Create a `.env` file in the root directory with all the environment variables listed in the `.env.example`.
+
+```env
+# .env file with all your environment variables
+
+OPEN_AI_API_KEY=
+
+# Firebase
+NEXT_PUBLIC_API_KEY= 
+NEXT_PUBLIC_AUTH_DOMAIN= 
+NEXT_PUBLIC_PROJECT_ID= 
+NEXT_PUBLIC_STORAGE_BUCKET= 
+NEXT_PUBLIC_MESSAGING_SENDER_ID= 
+NEXT_PUBLIC_APP_ID= 
+NEXT_PUBLIC_DATABASE_URL= 
+
+# Firebase google authentication
+WEB_CLIENT_ID=
+WEB_CLIENT_SECRET=
+```
+
+4. Start up the application
 
 ```bash
 npm run dev
 ```
 
-4. Open http://localhost:3000/ in your browser, login, and enter your OpenAI API Key
+5. Open http://localhost:3000/ in your browser, login, and enter your OpenAI API Key
 
 <br />
 
