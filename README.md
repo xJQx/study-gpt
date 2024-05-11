@@ -94,8 +94,10 @@ git clone https://github.com/xJQx/study-gpt.git
 
 2. Install dependencies
 
+In the `study-gpt/` directory, run
+
 ```bash
-npm run install
+npm install
 ```
 
 3. Set up Environment Variables
